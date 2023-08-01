@@ -1,0 +1,34 @@
+.main {
+  padding: 0 30px;
+  display: flex;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    margin-top: 70px;
+    margin-bottom: 0;
+    font-size: 40px;
+    font-weight: 600;
+    color: #27104E;
+  }
+
+  &__description {
+    padding: 0;
+    margin-top: 0;
+    font-size: 18px;
+    color: #27104E;
+  }
+
+  &__button {
+    width: 180px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #9854CB;
+    color: #ffff;
+    cursor: pointer;
+  }
+}

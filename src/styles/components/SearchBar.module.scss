@@ -1,0 +1,17 @@
+.search-bar {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 246px;
+  height: 47px;
+  border-radius: 30px;
+  border: 2px solid #ccc;
+
+  &__content {
+    input {
+      outline: none;
+      border: none;
+    }
+  }
+}

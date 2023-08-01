@@ -1,0 +1,35 @@
+.sidebar {
+  padding: 30px;
+  width: 200px;
+  height: 100vh;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 35px;
+    font-weight: 600;
+    color: #141522;
+  }
+
+  &__list {
+    padding: 0;
+    list-style: none;
+
+    &__item {
+      margin: 50px 0;
+      font-size: 18px;
+      font-weight: 500;
+      color: #141522;
+      cursor: pointer;
+
+      &:hover {
+        width: 90px;
+        border-bottom: 2px solid #9854CB;
+      }
+    }
+  }
+}
