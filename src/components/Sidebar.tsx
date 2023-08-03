@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { AccessAlarmTwoTone } from '@mui/icons-material';
 import styles from './../styles/components/Sidebar.module.scss';
 
 const Sidebar = () => {
@@ -22,7 +23,7 @@ const Sidebar = () => {
   return (
     <div className={styles['sidebar']}>
       <div className={styles['sidebar__container']}>
-        <h1 className={styles['sidebar__title']}>✨</h1>
+        <h1 className={styles['sidebar__title']}><AccessAlarmTwoTone /></h1>
         <ul className={styles['sidebar__list']}>
           {routes.map(route => {
             return (
