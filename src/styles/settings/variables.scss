@@ -1,0 +1,22 @@
+@import './mixins.scss';
+
+$colors: (
+  'background': #f3f5f9,
+  'purple': #9854cb,
+  'white': #fcfbff,
+  'titles': #141522,
+  'description': #27104E
+);
+
+$font: 'Poppins', sans-serif;
+$font-numbers: 'Poppins', sans-serif;
+
+$responsive: (
+  'sm': 768px,
+  'md': 1024px,
+  'lg': 1280px,
+  'xlg': 1440px
+);
+
+$defaultPadding: px-to-rem(102);
+$defaultPaddingMobile: 30px;

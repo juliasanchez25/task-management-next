@@ -1,0 +1,5 @@
+@use 'sass:math';
+
+@function px-to-rem($size, $default: 16) {
+  @return #{($size/$default)}rem;
+}
