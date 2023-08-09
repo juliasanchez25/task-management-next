@@ -2,6 +2,10 @@ import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/mate
 import styles from './../../../styles/pages/tasks/components/new-task-modal.module.scss';
 import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
+import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 type EditTaskModalProps = {
   open: boolean;
@@ -11,10 +15,14 @@ type EditTaskModalProps = {
   task: TaskModel;
 }
 
+dayjs.extend(timezone);
+dayjs.extend(utc);
+
 export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: EditTaskModalProps) => {
   const [title, setTitle] = useState<string>(task.title || '');
   const [description, setDescription] = useState<string>(task.description || '');
   const [type, setType] = useState<TaskModel['type']>(task.type || 'personal');
+  const [endAt, setEndAt] = useState<Date>(dayjs().add(1, 'day').toDate());
   const tasksTypes = [{ value:'work', label: 'Trabalho'}, {value: 'personal', label: 'Pessoal'}];
 
   const resetFields = () => {
@@ -30,7 +38,7 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
   };
 
   const handleEdit = () => {
-    const newTask = { ...task, title, description, type };
+    const newTask = { ...task, title, description, type, endAt };
 
     setTasks((tasks) => {
       return tasks.map((mappedTask) => {
@@ -42,6 +50,7 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
     });
     handleClose();
     setTaskToEdit(undefined);
+    toast.success('Tarefa editada com sucesso!');
   };
 
   return <>
@@ -74,6 +83,11 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
             </MenuItem>
           ))}
         </Select>
+        <Input
+          type='date'
+          value={dayjs(endAt).format('YYYY-MM-DD')}
+          onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
+        />
         <button onClick={handleEdit}>editar tarefa</button>
       </Box>
     </Modal>

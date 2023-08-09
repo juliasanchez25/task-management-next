@@ -2,6 +2,10 @@ import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/mate
 import styles from './../../../styles/pages/tasks/components/new-task-modal.module.scss';
 import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
+import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
 
 type NewTaskModalProps = {
   open: boolean;
@@ -9,10 +13,14 @@ type NewTaskModalProps = {
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
 }
 
+dayjs.extend(timezone);
+dayjs.extend(utc);
+
 export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [type, setType] = useState<TaskModel['type']>('personal');
+  const [endAt, setEndAt] = useState<Date>(dayjs().add(1, 'day').toDate());
   const tasksTypes = [{ value:'work', label: 'Trabalho'}, {value: 'personal', label: 'Pessoal'}];
 
   const resetFields = () => {
@@ -34,10 +42,12 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
       type,
       status: 'todo',
       createdAt: new Date(),
+      endAt
     };
 
     setTasks((tasks) => [...tasks, task]);
     handleClose();
+    toast.success('Tarefa criada com sucesso!');
   };
 
   return <>
@@ -70,6 +80,11 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
             </MenuItem>
           ))}
         </Select>
+        <Input
+          type='date'
+          value={dayjs(endAt).format('YYYY-MM-DD')}
+          onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
+        />
         <button onClick={handleCreate}>criar tarefa</button>
       </Box>
     </Modal>

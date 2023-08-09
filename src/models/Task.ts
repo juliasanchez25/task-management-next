@@ -8,4 +8,5 @@ export interface TaskModel {
   type: TaskType,
   status: TaskStatus;
   createdAt: Date;
+  endAt: Date;
 }

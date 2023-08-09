@@ -5,6 +5,7 @@ import { NewTaskModal } from './components/new-task-modal';
 import { EditTaskModal } from './components/edit-task-modal';
 import { RemoveTaskModal } from './components/remove-task.moda';
 import taskService from '@/services/TasksService';
+import { toast } from 'react-toastify';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -33,6 +34,7 @@ const Tasks = () => {
     if (taskToRemove) {
       setTasks((tasks) => tasks.filter((task) => task.id !== taskToRemove.id));
       setRemoveModal(false);
+      toast.success('Tarefa removida com sucesso!');
     }
   };
 
