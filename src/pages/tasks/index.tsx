@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TasksDroppable } from './components/tasks-droppable';
 import { TaskModel } from '@/models/Task';
 import { NewTaskModal } from './components/new-task-modal';
 import { EditTaskModal } from './components/edit-task-modal';
 import { RemoveTaskModal } from './components/remove-task.moda';
+import taskService from '@/services/TasksService';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -34,6 +35,14 @@ const Tasks = () => {
       setRemoveModal(false);
     }
   };
+
+  useEffect(() => {
+    setTasks(taskService.getTask());
+  }, []);
+
+  useEffect(() => {
+    taskService.setTask(tasks);
+  }, [tasks]);
 
   return (
     <div>
