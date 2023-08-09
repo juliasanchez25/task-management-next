@@ -1,4 +1,4 @@
-type TaskStatus = 'todo' | 'progress' | 'done'
+type TaskStatus = 'todo' | 'doing' | 'done'
 type TaskType = 'work' | 'personal'
 
 export interface TaskModel {
@@ -7,5 +7,5 @@ export interface TaskModel {
   description: string;
   type: TaskType,
   status: TaskStatus;
-  createdAt: string;
+  createdAt: Date;
 }

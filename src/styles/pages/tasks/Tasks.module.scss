@@ -1,0 +1,45 @@
+.main {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #FCFBFF;
+  border-radius: 20px;
+  width: 100%;
+
+  &__title {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 600;
+    color: #27104E;
+  }
+}
+
+.tasks {
+  margin-top: 30px;
+
+  &__container {
+    display: flex;
+    gap: 3rem;
+   width: 50vw;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #27104E;
+  }
+}
+
+.create-new-task {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #9854CB;
+  border-radius: 50%;
+  cursor: pointer;
+}
