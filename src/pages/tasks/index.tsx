@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { TasksDroppable } from './components/tasks-droppable';
+import styles from './../../styles/pages/tasks/index.module.scss';
+import { TasksDroppable } from './components/TasksDroppable';
 import { TaskModel } from '@/models/Task';
-import { NewTaskModal } from './components/new-task-modal';
-import { EditTaskModal } from './components/edit-task-modal';
-import { RemoveTaskModal } from './components/remove-task.moda';
+import { NewTaskModal } from './components/NewTaskModal';
+import { EditTaskModal } from './components/EditTaskModal';
+import { RemoveTaskModal } from './components/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
 
@@ -47,7 +48,7 @@ const Tasks = () => {
   }, [tasks]);
 
   return (
-    <div>
+    <>
       <NewTaskModal open={newModal} setOpen={setNewModal} setTasks={setTasks} />
       {taskToEdit && (
         <EditTaskModal
@@ -65,8 +66,10 @@ const Tasks = () => {
           onClickConfirm={handleRemove}
         />
       )}
-      <h1>Tasks</h1>
-      <button onClick={createTask}>new task</button>
+      <main className={styles['main']}>
+        <h1>Minhas tarefas</h1>
+        <button onClick={createTask} className={styles['main__create-task-btn']}>Criar nova tarefa</button>
+      </main>
       {tasks.length > 0 ? (
         <TasksDroppable
           tasks={tasks}
@@ -75,9 +78,9 @@ const Tasks = () => {
           remove={(id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => removeTask(id, event)}
         />
       ) : (
-        <p>No tasks</p>
+        <p>Nenhuma tarefa encontrada :(</p>
       )}
-    </div>
+    </>
   );
 };
 

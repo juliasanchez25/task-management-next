@@ -1,0 +1,38 @@
+@import '../../settings/mixins.scss';
+@import '../../settings/variables.scss';
+
+.main {
+  padding: px-to-rem(20) px-to-rem(30);
+  margin: px-to-rem(100) 0 px-to-rem(50);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: map-get($colors, 'white');
+  border-radius: 20px;
+  width: 80%;
+
+  &__create-task-btn {
+    width: px-to-rem(200);
+    max-width: 100%;
+    height: px-to-rem(50);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: map-get($colors, 'purple');
+    color: map-get($colors, 'white');
+    font-size: px-to-rem(16);
+    font-weight: 400;
+    cursor: pointer;
+    transition: 0.2s all ease-in;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: rgba(152, 84, 203, 0.8) 0px 5px 15px;
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: rgba(152, 84, 203, 0.8) 0px 0px 0px;
+    }
+  }
+}

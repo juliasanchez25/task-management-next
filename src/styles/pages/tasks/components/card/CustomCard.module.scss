@@ -1,0 +1,37 @@
+@import './../../../../settings/mixins.scss';
+@import './../../../../settings/variables.scss';
+
+.card {
+  padding: px-to-rem(15);
+  margin-bottom: px-to-rem(30);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: px-to-rem(348);
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__task-due {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: px-to-rem(14);
+    width: px-to-rem(110);
+    height: px-to-rem(30);
+    border-radius: 18px;
+    background-color: map-get($colors, 'green-background');
+    color: map-get($colors, 'green-title');
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

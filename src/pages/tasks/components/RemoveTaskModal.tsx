@@ -1,5 +1,5 @@
 import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/material';
-import styles from './../../../styles/pages/tasks/components/new-task-modal.module.scss';
+import styles from './../../../styles/pages/tasks/components/NewTaskModal.module.scss';
 import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
 

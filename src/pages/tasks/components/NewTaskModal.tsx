@@ -1,5 +1,6 @@
 import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/material';
-import styles from './../../../styles/pages/tasks/components/new-task-modal.module.scss';
+import styles from './../../../styles/pages/tasks/components/NewTaskModal.module.scss';
+import { Close } from '@mui/icons-material';
 import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
 import { toast } from 'react-toastify';
@@ -21,7 +22,7 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
   const [description, setDescription] = useState<string>('');
   const [type, setType] = useState<TaskModel['type']>('personal');
   const [endAt, setEndAt] = useState<Date>(dayjs().add(1, 'day').toDate());
-  const tasksTypes = [{ value:'work', label: 'Trabalho'}, {value: 'personal', label: 'Pessoal'}];
+  const tasksTypes = [{ value: 'work', label: 'Trabalho' }, { value: 'personal', label: 'Pessoal' }];
 
   const resetFields = () => {
     setTitle('');
@@ -53,21 +54,23 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
   return <>
     <Modal open={open}>
       <Box className={styles['modal']}>
-        <h3>Adicionar nova tarefa</h3>
-        <button onClick={handleClose}>fechar modal</button>
+        <div className={styles['modal__top']}>
+          <h3>Adicionar nova tarefa</h3>
+          <button onClick={handleClose} className={styles['modal__close-button']}><Close /></button>
+        </div>
         <Input
-          placeholder='TITULO DA TAREFA'
+          placeholder='Título da tarefa'
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextareaAutosize
-          placeholder='DESCRICAO DA TAREFA'
+          placeholder='Descrição da tarefa'
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <Select
-          placeholder='TIPO DA TAREFA'
+          placeholder='Tipo da tarefa'
           value={type}
           onChange={(e) => setType(e.target.value as TaskModel['type'])}
         >
@@ -85,7 +88,7 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
           value={dayjs(endAt).format('YYYY-MM-DD')}
           onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
         />
-        <button onClick={handleCreate}>criar tarefa</button>
+        <button onClick={handleCreate} className={styles['modal__create-button']}>Criar tarefa</button>
       </Box>
     </Modal>
   </>;

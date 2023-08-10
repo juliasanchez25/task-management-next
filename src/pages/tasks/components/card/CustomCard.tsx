@@ -1,6 +1,10 @@
 import { TaskModel } from '@/models/Task';
+import styles from './../../../../styles/pages/tasks/components/card/CustomCard.module.scss';
+import { Delete, MoreHoriz, EditNote } from '@mui/icons-material';
 import { Button, CardActions, CardContent } from '@mui/material';
 import Card from '@mui/material/Card';
+import Tag from './TaskTypeTag';
+import TaskDates from './TaskDates';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
@@ -11,6 +15,11 @@ type CardProps = {
   onClick?: () => void;
   remove: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
+
+const typeMapper = {
+  personal: 'Pessoal',
+  work: 'Trabalho',
+};
 
 dayjs.extend(timezone);
 dayjs.extend(utc);
@@ -37,19 +46,25 @@ export const CustomCard = ({ task, onClick, remove }: CardProps) => {
   };
 
   return (
-    <Card onClick={onClick}>
+    <Card onClick={onClick} className={styles['card']}>
       <CardContent>
+        <div className={styles['card__top']}>
+          <Tag type={typeMapper[task.type]} />
+          <div className={styles['card__task-due']}>
+            <p>{handleTaskEndAt()}</p>
+          </div>
+          <MoreHoriz htmlColor='#d1d1d1' />
+        </div>
         <h3>{task.title}</h3>
         <p>{task.description}</p>
-        <p>{task.type}</p>
-        <p>{dayjs(task.createdAt).format('DD/MM/YYYY HH:mm')}</p>
-        <p>{dayjs(task.endAt).format('DD/MM/YYYY')}</p>
-        <p>{handleTaskEndAt()}</p>
+        <TaskDates task={task} />
+
       </CardContent>
-      <CardActions>
+      <CardActions className={styles['card__actions']}>
+        <Button onClick={onClick} size="small"><EditNote /></Button>
         <Button onClick={(event) => {
           remove(task.id, event);
-        }} size="small">REMOVERRRRR</Button>
+        }} size="small"><Delete /></Button>
       </CardActions>
     </Card>
   );

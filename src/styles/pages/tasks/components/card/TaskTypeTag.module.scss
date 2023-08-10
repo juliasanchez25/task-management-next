@@ -1,0 +1,19 @@
+@import './../../../../settings/mixins.scss';
+@import './../../../../settings/variables.scss';
+
+.card-tag {
+  display: flex;
+
+  &__tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: px-to-rem(102);
+    height: px-to-rem(28);
+    font-size: px-to-rem(14);
+    font-weight: 600;
+    background-color: map-get($colors, 'blue-background');
+    color: map-get($colors, 'blue');
+    border-radius: 50px;
+  }
+}
