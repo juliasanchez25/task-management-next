@@ -17,17 +17,33 @@
     justify-content: space-between;
   }
 
+  &__title {
+    font-size: px-to-rem(17);
+  }
+
+  &__description {
+    font-size: px-to-rem(15);
+  }
+
   &__task-due {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: px-to-rem(14);
     width: px-to-rem(110);
     height: px-to-rem(30);
     border-radius: 18px;
     background-color: map-get($colors, 'green-background');
     color: map-get($colors, 'green-title');
-    font-weight: 600;
+    gap: px-to-rem(5);
+
+    p {
+      font-size: px-to-rem(14);
+      font-weight: 600;
+    }
+
+    &__icon {
+      font-size: px-to-rem(16);
+    }
   }
 
   &__actions {

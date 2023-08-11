@@ -1,6 +1,6 @@
 import { TaskModel } from '@/models/Task';
 import styles from './../../../../styles/pages/tasks/components/card/CustomCard.module.scss';
-import { Delete, MoreHoriz, EditNote } from '@mui/icons-material';
+import { Delete, MoreHoriz, EditNote, Schedule } from '@mui/icons-material';
 import { Button, CardActions, CardContent } from '@mui/material';
 import Card from '@mui/material/Card';
 import Tag from './TaskTypeTag';
@@ -51,14 +51,14 @@ export const CustomCard = ({ task, onClick, remove }: CardProps) => {
         <div className={styles['card__top']}>
           <Tag type={typeMapper[task.type]} />
           <div className={styles['card__task-due']}>
-            <p>{handleTaskEndAt()}</p>
+            <Schedule className={styles['card__task-due__icon']} />
+            <p >{handleTaskEndAt()}</p>
           </div>
           <MoreHoriz htmlColor='#d1d1d1' />
         </div>
-        <h3>{task.title}</h3>
-        <p>{task.description}</p>
+        <h3 className={styles['card__title']}>{task.title}</h3>
+        <p className={styles['card__description']}>{task.description}</p>
         <TaskDates task={task} />
-
       </CardContent>
       <CardActions className={styles['card__actions']}>
         <Button onClick={onClick} size="small"><EditNote /></Button>

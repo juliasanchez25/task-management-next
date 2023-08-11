@@ -3,13 +3,35 @@
 
 .main {
   padding: px-to-rem(20) px-to-rem(30);
-  margin: px-to-rem(100) 0 px-to-rem(50);
+  margin: px-to-rem(50) 0 px-to-rem(20);
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: map-get($colors, 'white');
   border-radius: 20px;
   width: 80%;
+
+  &__search-box {
+    padding: px-to-rem(10) px-to-rem(20);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: px-to-rem(300);
+    border-radius: 20px;
+    border: 1px solid #cccc;
+
+    &__input {
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: transparent;
+    }
+
+    &__icon {
+      color: map-get($colors, 'gray');
+      cursor: pointer;
+    }
+  }
 
   &__create-task-btn {
     width: px-to-rem(200);

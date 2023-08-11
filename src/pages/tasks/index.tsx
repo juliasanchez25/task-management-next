@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styles from './../../styles/pages/tasks/index.module.scss';
 import { TasksDroppable } from './components/TasksDroppable';
 import { TaskModel } from '@/models/Task';
@@ -7,6 +7,7 @@ import { EditTaskModal } from './components/EditTaskModal';
 import { RemoveTaskModal } from './components/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
+import { Search } from '@mui/icons-material';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -15,6 +16,7 @@ const Tasks = () => {
   const [taskToEdit, setTaskToEdit] = useState<TaskModel>();
   const [taskToRemove, setTaskToRemove] = useState<TaskModel>();
   const [removeModal, setRemoveModal] = useState<boolean>(false);
+  const [search, setSearch] = useState('');
 
   const createTask = () => {
     setNewModal(true);
@@ -39,6 +41,10 @@ const Tasks = () => {
     }
   };
 
+  const getSearchTasks = useMemo(() => {
+    return tasks.filter(task => task.title.toLowerCase().includes(search.toLowerCase()));
+  }, [tasks, search]);
+
   useEffect(() => {
     setTasks(taskService.getTask());
   }, []);
@@ -49,6 +55,20 @@ const Tasks = () => {
 
   return (
     <>
+      <main className={styles['main']}>
+        <h1>Minhas tarefas</h1>
+        <div className={styles['main__search-box']}>
+          <input
+            type='text'
+            placeholder='Pesquisar tarefa...'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className={styles['main__search-box__input']}
+          />
+          <Search className={styles['main__search-box__icon']} />
+        </div>
+        <button onClick={createTask} className={styles['main__create-task-btn']}>Criar nova tarefa</button>
+      </main>
       <NewTaskModal open={newModal} setOpen={setNewModal} setTasks={setTasks} />
       {taskToEdit && (
         <EditTaskModal
@@ -66,19 +86,17 @@ const Tasks = () => {
           onClickConfirm={handleRemove}
         />
       )}
-      <main className={styles['main']}>
-        <h1>Minhas tarefas</h1>
-        <button onClick={createTask} className={styles['main__create-task-btn']}>Criar nova tarefa</button>
-      </main>
-      {tasks.length > 0 ? (
+      {getSearchTasks.length > 0 ? (
         <TasksDroppable
-          tasks={tasks}
+          tasks={getSearchTasks}
           setTasks={setTasks}
           openEditModal={editTask}
           remove={(id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => removeTask(id, event)}
         />
       ) : (
-        <p>Nenhuma tarefa encontrada :(</p>
+        <div className={styles['empty-tasks']}>
+          <h2>Nenhuma tarefa criada</h2>
+        </div>
       )}
     </>
   );

@@ -14,15 +14,15 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
   const status = [
     {
       id: 'todo',
-      name: 'A fazer'
+      name: 'To Do'
     },
     {
       id: 'doing',
-      name: 'Fazendo'
+      name: 'Doing'
     },
     {
       id: 'done',
-      name: 'Pronto'
+      name: 'Done'
     }
   ];
 
