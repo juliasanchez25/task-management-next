@@ -12,8 +12,17 @@
     height: px-to-rem(28);
     font-size: px-to-rem(14);
     font-weight: 600;
-    background-color: map-get($colors, 'blue-background');
     color: map-get($colors, 'blue');
     border-radius: 50px;
   }
+}
+
+.personal {
+  background-color: map-get($colors, 'blue-background');
+  color: rgb(72, 131, 209);
+}
+
+.work {
+  background-color: #f5b6d6;
+  color: rgb(197, 80, 144);
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import Image from 'next/image';
 import styles from './../../styles/pages/tasks/index.module.scss';
 import { TasksDroppable } from './components/TasksDroppable';
 import { TaskModel } from '@/models/Task';
@@ -8,6 +9,8 @@ import { RemoveTaskModal } from './components/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
 import { Search } from '@mui/icons-material';
+import { Switch } from '@mui/material';
+import imageNotFound from '../../../public/assets/images/not-found.png';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -95,7 +98,8 @@ const Tasks = () => {
         />
       ) : (
         <div className={styles['empty-tasks']}>
-          <h2>Nenhuma tarefa criada</h2>
+          <h2 className={styles['empty-tasks__title']}>Nenhuma tarefa encontrada 🙁</h2>
+          <Image className={styles['empty-tasks__image']} src={imageNotFound} alt='Imagem de mulher segurando uma lupa' />
         </div>
       )}
     </>

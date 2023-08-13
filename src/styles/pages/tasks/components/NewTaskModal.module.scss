@@ -19,6 +19,24 @@
     display: flex;
   }
 
+  &__label {
+    margin-bottom: -15px;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-size: px-to-rem(12);
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__textarea {
+    margin: px-to-rem(12) 0;
+    padding: px-to-rem(10) px-to-rem(10);
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid map-get($colors, 'gray');
+    outline: none;
+    border-radius: 5px;
+  }
+
   &__close-button {
     position: absolute;
     margin-right: px-to-rem(15);
@@ -30,6 +48,7 @@
   }
 
   &__create-button {
+    margin: px-to-rem(14) 0;
     height: px-to-rem(47);
     font-size: px-to-rem(16);
     font-weight: 600;

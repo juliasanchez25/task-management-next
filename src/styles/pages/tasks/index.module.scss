@@ -58,3 +58,22 @@
     }
   }
 }
+
+.empty-tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: px-to-rem(30);
+    font-weight: 600;
+    color: map-get($colors, 'titles');
+  }
+
+  &__image {
+    width: px-to-rem(600);
+    max-width: 100%;
+    height: auto;
+  }
+}

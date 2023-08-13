@@ -2,6 +2,10 @@
 @import './settings/mixins.scss';
 @import './settings/variables.scss';
 
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,11 +13,6 @@ body {
   background-color: map-get($colors, 'background');
 }
 
-* {
-  font-family: 'Poppins', sans-serif;
-}
-
 .page-content {
   margin-left: 10%;
-  /* margin: 0 5% 0 10%; */
 }

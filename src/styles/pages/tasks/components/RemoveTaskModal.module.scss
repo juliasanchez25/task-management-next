@@ -1,0 +1,55 @@
+@import './../../../settings/mixins.scss';
+@import './../../../settings/variables.scss';
+
+.modal {
+  position: absolute;
+  padding: px-to-rem(20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: px-to-rem(500);
+  width: fit-content;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  border-radius: 8px;
+  gap: px-to-rem(20);
+  transform: translate(-50%, -50%);
+
+  &__title {
+    font-size: px-to-rem(20);
+    font-weight: 500;
+  }
+
+  &__button {
+    width: px-to-rem(280);
+    max-width: 100%;
+    height: px-to-rem(40);
+    border: none;
+    border-radius: 5px;
+    font-size: px-to-rem(16);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    &--confirm {
+      background-color: rgb(255, 99, 99);
+      color: map-get($colors, 'white');
+
+      &:hover {
+        background-color: rgb(247, 75, 75);
+      }
+    }
+
+    &--cancel {
+      &:hover {
+        background-color: rgb(233, 233, 233);
+      }
+    }
+  }
+}

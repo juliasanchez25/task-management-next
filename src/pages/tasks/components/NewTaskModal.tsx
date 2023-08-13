@@ -1,4 +1,4 @@
-import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/material';
+import { Box, FormControl, Input, InputLabel, MenuItem, Modal, Select, TextareaAutosize, TextField } from '@mui/material';
 import styles from './../../../styles/pages/tasks/components/NewTaskModal.module.scss';
 import { Close } from '@mui/icons-material';
 import { useState } from 'react';
@@ -55,34 +55,45 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
     <Modal open={open}>
       <Box className={styles['modal']}>
         <div className={styles['modal__top']}>
-          <h3>Adicionar nova tarefa</h3>
+          <h3 className={styles['modal__title']}>Adicionar nova tarefa</h3>
           <button onClick={handleClose} className={styles['modal__close-button']}><Close /></button>
         </div>
-        <Input
-          placeholder='Título da tarefa'
-          type="text"
+        <TextField
+          required
+          label='Título da tarefa'
+          type='text'
+          id='standard-required'
+          variant='standard'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextareaAutosize
           placeholder='Descrição da tarefa'
+          className={styles['modal__textarea']}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <Select
-          placeholder='Tipo da tarefa'
-          value={type}
-          onChange={(e) => setType(e.target.value as TaskModel['type'])}
-        >
-          {tasksTypes.map(({ value, label }) => (
-            <MenuItem
-              key={value}
-              value={value}
-            >
-              {label}
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+          <Select
+            required
+            label="Categoria"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={type}
+            onChange={(e) => setType(e.target.value as TaskModel['type'])}
+          >
+            {tasksTypes.map(({ value, label }) => (
+              <MenuItem
+                key={value}
+                value={value}
+              >
+                {label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <label className={styles['modal__label']}>Data de entrega</label>
         <Input
           type='date'
           value={dayjs(endAt).format('YYYY-MM-DD')}

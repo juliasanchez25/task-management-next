@@ -1,4 +1,4 @@
-import { Box, Input, MenuItem, Modal, Select, TextareaAutosize } from '@mui/material';
+import { Box, FormControl, Input, InputLabel, MenuItem, Modal, Select, TextField, TextareaAutosize } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import styles from './../../../styles/pages/tasks/components/NewTaskModal.module.scss';
 import { useState } from 'react';
@@ -61,32 +61,41 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
           <h3>Editar tarefa</h3>
           <button onClick={handleClose} className={styles['modal__close-button']}><Close /></button>
         </div>
-        <Input
-          placeholder='Título da tarefa'
-          type="text"
+        <TextField
+          required
+          label='Título da tarefa'
+          type='text'
+          id='standard-required'
+          variant='standard'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextareaAutosize
           placeholder='Descrição da tarefa'
+          className={styles['modal__textarea']}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <Select
-          placeholder='Tipo da tarefa'
-          value={type}
-          onChange={(e) => setType(e.target.value as TaskModel['type'])}
-        >
-          {tasksTypes.map(({ value, label }) => (
-            <MenuItem
-              key={value}
-              value={value}
-            >
-              {label}
-            </MenuItem>
-          ))}
-        </Select>
-        <label>Data de entrega:</label>
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+          <Select
+            label="Categoria"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={type}
+            onChange={(e) => setType(e.target.value as TaskModel['type'])}
+          >
+            {tasksTypes.map(({ value, label }) => (
+              <MenuItem
+                key={value}
+                value={value}
+              >
+                {label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <label className={styles['modal__label']}>Data de entrega</label>
         <Input
           type='date'
           value={dayjs(endAt).format('YYYY-MM-DD')}

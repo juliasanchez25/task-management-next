@@ -6,7 +6,7 @@ import imageTimeManagement from './../../public/assets/images/time-management.pn
 
 const Home = () => {
   return (
-    <>
+    <div>
       <main className={styles['main']}>
         <div>
           <h1 className={styles['main__title']}>Tarefas</h1>
@@ -19,7 +19,7 @@ const Home = () => {
       <section className={styles['progress-cards-area']}>
         <ProgressCard />
       </section>
-    </>
+    </div>
   );
 };
 

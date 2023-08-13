@@ -17,6 +17,13 @@
     justify-content: space-between;
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
   &__title {
     font-size: px-to-rem(17);
   }
@@ -43,6 +50,31 @@
 
     &__icon {
       font-size: px-to-rem(16);
+    }
+  }
+
+  &__dates-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__dates {
+    display: flex;
+
+    &__late {
+      background-color: #ee8282;
+      color: #b32f2f;
+    }
+
+    &__today {
+      background-color: rgb(255, 196, 0);
+      color: rgb(190, 60, 0);
+    }
+
+    &__inTime {
+      background-color: rgb(168, 212, 168);
+      color: #008000;
     }
   }
 

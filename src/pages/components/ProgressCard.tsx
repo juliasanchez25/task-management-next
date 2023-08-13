@@ -25,8 +25,8 @@ const progresses = [
 const ProgressCard = () => {
   return (
     <>
-      {progresses.map((progress, index) => {
-        <div key={index} className={styles['card']} >
+      {progresses.map((progress, index) => (
+        <div key={index} className={styles['card']}>
           <div className={styles['card__header']}>
             <h4 className={styles['card__date']}>{progress.date}</h4>
           </div>
@@ -41,8 +41,8 @@ const ProgressCard = () => {
             <p>Progress</p>
             <span>{progress.progress}%</span>
           </div>
-        </div>;
-      })}
+        </div>
+      ))}
     </>
   );
 };
