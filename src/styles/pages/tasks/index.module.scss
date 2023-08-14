@@ -7,9 +7,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: map-get($colors, 'white');
+  background-color: map-get($colors, 'off-white');
   border-radius: 20px;
-  width: 80%;
+  width: 85%;
 
   &__search-box {
     padding: px-to-rem(10) px-to-rem(20);
@@ -41,7 +41,7 @@
     outline: none;
     border-radius: 10px;
     background-color: map-get($colors, 'purple');
-    color: map-get($colors, 'white');
+    color: map-get($colors, 'off-white');
     font-size: px-to-rem(16);
     font-weight: 400;
     cursor: pointer;
@@ -68,7 +68,7 @@
   &__title {
     font-size: px-to-rem(30);
     font-weight: 600;
-    color: map-get($colors, 'titles');
+    color: map-get($colors, 'title');
   }
 
   &__image {

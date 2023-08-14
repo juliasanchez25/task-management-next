@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './../../styles/pages/components/ProgressCard.module.scss';
 
 const progresses = [
@@ -11,18 +11,25 @@ const progresses = [
   {
     date: 'Ago 08, 2023',
     taskTitle: 'Criar landing page',
-    taskCurrentStatus: 'Completed',
-    progress: 100
+    taskCurrentStatus: 'Doing',
+    progress: 50
   },
   {
     date: 'Ago 08, 2023',
     taskTitle: 'Criar landing page',
-    taskCurrentStatus: 'Completed',
-    progress: 100
+    taskCurrentStatus: 'Doing',
+    progress: 20
   },
 ];
 
 const ProgressCard = () => {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+    return () => setAnimate(false);
+  }, []);
+
   return (
     <>
       {progresses.map((progress, index) => (
@@ -35,10 +42,15 @@ const ProgressCard = () => {
             <p className={styles['card__task-current-status']}>{progress.taskCurrentStatus}</p>
           </div>
           <div className={styles['card__progress-container']}>
-            <div className={styles['card__progress-container__progress-bar']}></div>
+            <div
+              className={`${styles['card__progress-container__progress-bar']} ${animate ? styles['card__progress-container__progress-bar--animate'] : ''}`}
+              style={{
+                width: `${progress.progress}%`,
+              }}
+            ></div>
           </div>
           <div className={styles['card__progress-status']}>
-            <p>Progress</p>
+            <p>Progresso</p>
             <span>{progress.progress}%</span>
           </div>
         </div>

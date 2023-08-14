@@ -1,5 +1,5 @@
 import { TaskModel } from '@/models/Task';
-import styles from './../../../../styles/pages/tasks/components/card/CustomCard.module.scss';
+import styles from './../../../../styles/pages/tasks/components/Card/CustomCard.module.scss';
 import { Delete, MoreHoriz, EditNote, Schedule } from '@mui/icons-material';
 import { CardActions, CardContent, IconButton, Tooltip } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -68,15 +68,11 @@ export const CustomCard = ({ task, onClick, remove }: CardProps) => {
           </div>
           <MoreHoriz htmlColor='#d1d1d1' />
         </div>
-
         <h3 className={styles['card__title']}>{task.title}</h3>
-        <p className={styles['card__description']}>{task.description}</p>
-
         <div className={styles['card__dates-actions']}>
           <div className={styles['card__dates']}>
             <TaskDates task={task} />
           </div>
-
           <CardActions className={styles['card__actions']}>
             <Tooltip title='Editar tarefa'>
               <IconButton onClick={onClick} size="small"><EditNote /></IconButton>

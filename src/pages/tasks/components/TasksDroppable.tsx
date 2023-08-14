@@ -1,7 +1,7 @@
 import { TaskModel } from '@/models/Task';
 import styles from './../../../styles/pages/tasks/components/TasksDroppable.module.scss';
 import { DragDropContext, Draggable, DropResult, Droppable, ResponderProvided } from 'react-beautiful-dnd';
-import { CustomCard } from './card/CustomCard';
+import { CustomCard } from './Card/CustomCard';
 
 type TasksDroppableProps = {
   tasks: TaskModel[];
@@ -27,6 +27,7 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
   ];
 
   const onDragEnd = (result: DropResult) => {
+    console.log(result);
     if (!result.destination) return;
 
     const changedTasks = tasks.map((task) => {
@@ -35,7 +36,12 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
       }
       return task;
     });
-    setTasks(changedTasks);
+
+    const movedTask = changedTasks.find((task) => task.id.toString() === result.draggableId);
+    const tasksWithoutMovedTask = changedTasks.filter((task) => task.id.toString() !== result.draggableId);
+    const tasksWithMovedTask = tasksWithoutMovedTask.slice(0, result.destination.index).concat(movedTask as TaskModel).concat(tasksWithoutMovedTask.slice(result.destination.index));
+
+    setTasks(tasksWithMovedTask);
   };
 
   return (

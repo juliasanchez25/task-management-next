@@ -9,7 +9,6 @@ import { RemoveTaskModal } from './components/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
 import { Search } from '@mui/icons-material';
-import { Switch } from '@mui/material';
 import imageNotFound from '../../../public/assets/images/not-found.png';
 
 const Tasks = () => {
@@ -46,7 +45,7 @@ const Tasks = () => {
 
   const getSearchTasks = useMemo(() => {
     return tasks.filter(task => task.title.toLowerCase().includes(search.toLowerCase()));
-  }, [tasks, search]);
+  }, [search, tasks]);
 
   useEffect(() => {
     setTasks(taskService.getTask());

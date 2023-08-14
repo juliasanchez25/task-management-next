@@ -1,0 +1,21 @@
+@import './../../../../settings/mixins.scss';
+@import './../../../../settings/variables.scss';
+
+.task-dates {
+  &__date {
+    display: flex;
+    align-items: center;
+    font-size: px-to-rem(13);
+    color: map-get($colors, 'gray');
+    font-style: italic;
+    gap: px-to-rem(5);
+
+    p {
+      margin: 3px 0;
+    }
+  }
+
+  &__icon {
+    font-size: px-to-rem(18);
+  }
+}

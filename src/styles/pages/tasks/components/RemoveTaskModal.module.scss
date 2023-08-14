@@ -38,17 +38,17 @@
     }
 
     &--confirm {
-      background-color: rgb(255, 99, 99);
-      color: map-get($colors, 'white');
+      background-color: #ff6363;
+      color: map-get($colors, 'off-white');
 
       &:hover {
-        background-color: rgb(247, 75, 75);
+        background-color: #f74b4b;
       }
     }
 
     &--cancel {
       &:hover {
-        background-color: rgb(233, 233, 233);
+        background-color: #e9e9e9;
       }
     }
   }

@@ -7,21 +7,21 @@
   max-width: 100%;
   height: px-to-rem(225);
   max-height: auto;
-  background-color: map-get($colors, 'white');
+  background-color: map-get($colors, 'off-white');
   border-radius: 22.69px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   &__date {
     font-size: px-to-rem(16);
-    font-weight: 700;
-    color: #d9d9d9;
+    font-weight: 500;
+    color: map-get($colors, 'gray');
   }
 
   &__task-title {
     margin-bottom: 0;
     font-size: px-to-rem(20);
     font-weight: 600;
-    color: map-get($colors, 'titles');
+    color: map-get($colors, 'title');
   }
 
   &__task-current-status {
@@ -40,7 +40,11 @@
 
     &__progress-bar {
       height: 100%;
-      background-color: map-get($colors, 'purple');
+      background-color: map-get($colors, 'green');
+
+      &--animate {
+        animation: progressBarAnimation 1.5s ease-in-out forwards;
+      }
     }
   }
 
@@ -50,9 +54,16 @@
     justify-content: space-between;
     align-items: center;
 
-    p, span {
+    p,
+    span {
       font-size: px-to-rem(14);
       color: map-get($colors, 'description');
     }
+  }
+}
+
+@keyframes progressBarAnimation {
+  from {
+    width: 0%;
   }
 }

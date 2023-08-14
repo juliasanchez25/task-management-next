@@ -5,7 +5,7 @@ export interface TaskModel {
   id: number;
   title: string;
   description: string;
-  type: TaskType,
+  type: TaskType;
   status: TaskStatus;
   createdAt: Date;
   endAt: Date;

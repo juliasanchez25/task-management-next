@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './../../../../styles/pages/tasks/components/card/TaskTypeTag.module.scss';
+import styles from './../../../../styles/pages/tasks/components/Card/TaskTypeTag.module.scss';
 
 type TaskType = 'personal' | 'work';
 
@@ -21,7 +21,6 @@ const TaskTypeTag = ({ type }: TagParams) => {
       return styles['work'];
     }
   };
-
 
   return (
     <div className={styles['card-tag']}>

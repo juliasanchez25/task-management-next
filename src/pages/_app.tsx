@@ -1,36 +1,31 @@
-import { createContext, useState } from 'react';
-import Sidebar from '@/components/Sidebar';
+import { useState } from 'react';
+import Sidebar from '@/components/sidebar/Sidebar';
 import './../styles/globals.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ReactSwitch from 'react-switch';
-
-type ThemeContextType = {
-  theme: string;
-  toggleTheme: () => void;
-};
-
-const ThemeContext = createContext<ThemeContextType | null>(null);
+import { ThemeProvider } from '../context/ThemeContext';
+import { Nightlight, LightMode } from '@mui/icons-material';
 
 export default function App({ Component, pageProps }: any) {
-  const [theme, setTheme] = useState('dark');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
-    setTheme((current) => (current === 'light' ? 'dark' : 'light'));
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark-mode');
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div id={theme}>
-        <ToastContainer />
-        <div className='page-content'>
-          <Sidebar />
-          <div>
-            {/* <ReactSwitch onChange={toggleTheme} checked={theme === 'dark'} /> */}
-            <Component {...pageProps} />
-          </div>
+    <ThemeProvider>
+      <ToastContainer />
+      <div className='page-content'>
+        <button onClick={toggleTheme} className='theme-toggle'>
+          {isDarkMode ? <LightMode /> : <Nightlight />}
+        </button>
+        <Sidebar />
+        <div>
+          <Component {...pageProps} />
         </div>
       </div>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }

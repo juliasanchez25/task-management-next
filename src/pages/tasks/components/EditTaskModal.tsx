@@ -23,7 +23,7 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
   const [title, setTitle] = useState<string>(task.title || '');
   const [description, setDescription] = useState<string>(task.description || '');
   const [type, setType] = useState<TaskModel['type']>(task.type || 'personal');
-  const [endAt, setEndAt] = useState<Date>(dayjs().add(1, 'day').toDate());
+  const [endAt, setEndAt] = useState<Date>(task.endAt || dayjs().add(1, 'day').toDate());
   const tasksTypes = [{ value: 'work', label: 'Trabalho' }, { value: 'personal', label: 'Pessoal' }];
 
   const resetFields = () => {
@@ -39,16 +39,17 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
   };
 
   const handleEdit = () => {
-    const newTask = { ...task, title, description, type, endAt };
+    const editedTask = { ...task, title, description, type, endAt };
 
     setTasks((tasks) => {
       return tasks.map((mappedTask) => {
         if (mappedTask.id === task.id) {
-          return newTask;
+          return editedTask;
         }
         return mappedTask;
       });
     });
+
     handleClose();
     setTaskToEdit(undefined);
     toast.success('Tarefa editada com sucesso!');
@@ -58,7 +59,6 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
     <Modal open={open}>
       <Box className={styles['modal']}>
         <div className={styles['modal__top']}>
-          <h3>Editar tarefa</h3>
           <button onClick={handleClose} className={styles['modal__close-button']}><Close /></button>
         </div>
         <TextField

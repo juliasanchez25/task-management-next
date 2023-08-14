@@ -1,7 +1,7 @@
 import { Box, FormControl, Input, InputLabel, MenuItem, Modal, Select, TextareaAutosize, TextField } from '@mui/material';
 import styles from './../../../styles/pages/tasks/components/NewTaskModal.module.scss';
 import { Close } from '@mui/icons-material';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { TaskModel } from '@/models/Task';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
