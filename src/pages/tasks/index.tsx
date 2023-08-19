@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import styles from './../../styles/pages/tasks/index.module.scss';
-import { TasksDroppable } from './components/TasksDroppable';
+import { TasksDroppable } from './components/tasks-droppable/TasksDroppable';
 import { TaskModel } from '@/models/Task';
-import { NewTaskModal } from './components/NewTaskModal';
-import { EditTaskModal } from './components/EditTaskModal';
-import { RemoveTaskModal } from './components/RemoveTaskModal';
+import { NewTaskModal } from './components/new-task-modal/NewTaskModal';
+import { EditTaskModal } from './components/edit-task-modal/EditTaskModal';
+import { RemoveTaskModal } from './components/remove-task-modal/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
 import { Search } from '@mui/icons-material';
 import imageNotFound from '../../../public/assets/images/not-found.png';
+import * as s from './styled-tasks-index';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -57,20 +58,19 @@ const Tasks = () => {
 
   return (
     <>
-      <main className={styles['main']}>
-        <h1>Minhas tarefas</h1>
-        <div className={styles['main__search-box']}>
-          <input
+      <s.Main>
+        <s.MainTitle>Minhas tarefas</s.MainTitle>
+        <s.SearchBox>
+          <s.SearchInput
             type='text'
             placeholder='Pesquisar tarefa...'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className={styles['main__search-box__input']}
           />
           <Search className={styles['main__search-box__icon']} />
-        </div>
-        <button onClick={createTask} className={styles['main__create-task-btn']}>Criar nova tarefa</button>
-      </main>
+        </s.SearchBox>
+        <s.CreateTaskButton onClick={createTask}>Criar nova tarefa</s.CreateTaskButton>
+      </s.Main>
       <NewTaskModal open={newModal} setOpen={setNewModal} setTasks={setTasks} />
       {taskToEdit && (
         <EditTaskModal

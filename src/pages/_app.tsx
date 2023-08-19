@@ -3,7 +3,6 @@ import Sidebar from '@/components/sidebar/Sidebar';
 import './../styles/globals.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ThemeProvider } from '../context/ThemeContext';
 import { Nightlight, LightMode } from '@mui/icons-material';
 
 export default function App({ Component, pageProps }: any) {
@@ -15,7 +14,7 @@ export default function App({ Component, pageProps }: any) {
   };
 
   return (
-    <ThemeProvider>
+    <>
       <ToastContainer />
       <div className='page-content'>
         <button onClick={toggleTheme} className='theme-toggle'>
@@ -26,6 +25,6 @@ export default function App({ Component, pageProps }: any) {
           <Component {...pageProps} />
         </div>
       </div>
-    </ThemeProvider>
+    </>
   );
 }

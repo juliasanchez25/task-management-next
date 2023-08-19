@@ -1,7 +1,7 @@
 import { TaskModel } from '@/models/Task';
-import styles from './../../../styles/pages/tasks/components/TasksDroppable.module.scss';
-import { DragDropContext, Draggable, DropResult, Droppable, ResponderProvided } from 'react-beautiful-dnd';
-import { CustomCard } from './Card/CustomCard';
+import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import { CustomCard } from '../Card/custom-card/CustomCard';
+import * as s from './styled-tasks-droppable';
 
 type TasksDroppableProps = {
   tasks: TaskModel[];
@@ -45,11 +45,11 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
   };
 
   return (
-    <div className={styles['droppable-tasks']}>
+    <s.DroppableTasks>
       <DragDropContext onDragEnd={onDragEnd}>
         {status.map((status, index) => (
-          <div className={styles['droppable-tasks__container']} key={index}>
-            <h1 className={styles['droppable-tasks__title']}>{status.name}</h1>
+          <s.DroppableTasksContainer key={index}>
+            <s.Title>{status.name}</s.Title>
             <Droppable droppableId={status.id}>
               {(provided) => (
                 <>
@@ -79,9 +79,9 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
                 </>
               )}
             </Droppable>
-          </div>
+          </s.DroppableTasksContainer>
         ))}
       </DragDropContext>
-    </div>
+    </s.DroppableTasks>
   );
 };

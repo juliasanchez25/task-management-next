@@ -13,7 +13,7 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  background-color: ${theme.primaryColor};
+  background-color: ${theme.background};
   overflow-x: hidden;
   box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
 `;

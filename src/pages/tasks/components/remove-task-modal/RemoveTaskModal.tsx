@@ -1,6 +1,6 @@
 import { Box, Modal } from '@mui/material';
 import cn from 'classnames';
-import styles from './../../../styles/pages/tasks/components/RemoveTaskModal.module.scss';
+import styles from './../../../../styles/pages/tasks/components/RemoveTaskModal.module.scss';
 
 type RemoveTaskModalProps = {
   open: boolean;
