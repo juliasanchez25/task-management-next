@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import theme from '@/theme/theme';
+import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
 
 export const Main = styled.main`
@@ -8,14 +7,19 @@ export const Main = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${theme.background};
+  background-color: ${({ theme }) => theme.background};
   border-radius: 20px;
   width: 85%;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 3rem;
+  }
 `;
 
 export const MainTitle = styled.h1`
   font-size: ${pxToRem(30)};
-  color: ${theme.title};
+  color: ${({ theme }) => theme.title};
 `;
 
 export const SearchBox = styled.div`
@@ -26,10 +30,10 @@ export const SearchBox = styled.div`
   width: ${pxToRem(300)};
   border-radius: 20px;
   border: 1px solid #cccc;
-  background-color: ${theme.title};
+  background-color: transparent;
 
   &__icon {
-    color: ${theme.gray};
+    color: ${({ theme }) => theme.gray};
     cursor: pointer;
   }
 `;
@@ -39,7 +43,7 @@ export const SearchInput = styled.input`
   outline: none;
   border: none;
   background-color: transparent;
-  color: #000000;
+  color: ${({ theme }) => theme.title};
 `;
 
 export const CreateTaskButton = styled.button`
@@ -49,8 +53,8 @@ export const CreateTaskButton = styled.button`
   border: none;
   outline: none;
   border-radius: 10px;
-  background-color: ${theme.purple};
-  color: ${theme.offWhite};
+  background-color: ${({ theme }) => theme.purple};
+  color:  ${({ theme }) => theme.offWhite};
   font-size: ${pxToRem(16)};
   font-weight: 400;
   cursor: pointer;

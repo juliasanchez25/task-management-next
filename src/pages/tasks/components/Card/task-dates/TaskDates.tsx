@@ -12,7 +12,7 @@ const TaskDates = ({ task }: TaskTypeTagProps) => {
     <s.TaskDatesContainer>
       <s.DateItem>
         <s.CalendarIcon />
-        <p>Criada em: {dayjs(task.createdAt).format('DD/MM/YYYY HH:mm')}</p>
+        <p>Criada em: {dayjs(task.createdAt).format('DD/MM/YYYY')}</p>
       </s.DateItem>
       <s.DateItem>
         <s.ScheduleIcon />

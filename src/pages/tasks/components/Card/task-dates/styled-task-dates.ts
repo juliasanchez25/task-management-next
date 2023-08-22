@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
-import theme from '@/theme/theme';
 import { CalendarToday, Schedule } from '@mui/icons-material';
 
 export const TaskDatesContainer = styled.div`
@@ -10,7 +9,7 @@ export const DateItem = styled.div`
   display: flex;
   align-items: center;
   font-size: ${pxToRem(14)};
-  color: ${theme.title};
+  color: ${({ theme }) => theme.title};
   font-style: italic;
   gap: ${pxToRem(5)};
 

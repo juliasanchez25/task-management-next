@@ -1,20 +1,18 @@
 import { pxToRem } from '@/utils/px-to-rem';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { Schedule } from '@mui/icons-material';
 import { Card, CardActions, CardContent } from '@mui/material';
-import theme from '@/theme/theme';
 
 export const Container = styled(Card)`
   padding: ${pxToRem(15)};
-  margin-bottom: ${pxToRem(30)};
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: ${pxToRem(348)};
   max-width: 100%;
   height: auto;
-  background-color: ${theme.background};
-  color: ${theme.title};
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.title};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
@@ -40,17 +38,17 @@ export const TaskDue = styled.div<{ status: 'late' | 'today' | 'inTime' }>`
   gap: ${pxToRem(5)};
   background-color: ${props => {
     switch (props.status) {
-    case 'late': return theme.lightRed;
-    case 'today': return theme.yellow;
-    case 'inTime': return theme.lightGreen;
+    case 'late': return props.theme.lightRed;
+    case 'today': return props.theme.yellow;
+    case 'inTime': return props.theme.lightGreen;
     default: return 'transparent';
     }
   }};
   color: ${props => {
     switch (props.status) {
-    case 'late': return theme.red;
-    case 'today': return theme.orange;
-    case 'inTime': return theme.green;
+    case 'late': return props.theme.red;
+    case 'today': return props.theme.orange;
+    case 'inTime': return props.theme.green;
     default: return 'inherit';
     }
   }};

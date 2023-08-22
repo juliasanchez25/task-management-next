@@ -1,29 +1,42 @@
 import { TaskModel } from '@/models/Task';
-import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
-import { CustomCard } from '../Card/custom-card/CustomCard';
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from 'react-beautiful-dnd';
+import CustomCard from '../Card/custom-card/CustomCard';
 import * as s from './styled-tasks-droppable';
 
 type TasksDroppableProps = {
   tasks: TaskModel[];
   setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   openEditModal: (id: number) => void;
-  remove: (id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}
+  remove: (
+    id: number,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
+};
 
-export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: TasksDroppableProps) => {
+const TasksDroppable = ({
+  tasks,
+  setTasks,
+  openEditModal,
+  remove,
+}: TasksDroppableProps) => {
   const status = [
     {
       id: 'todo',
-      name: 'To Do'
+      name: 'To Do',
     },
     {
       id: 'doing',
-      name: 'Doing'
+      name: 'Doing',
     },
     {
       id: 'done',
-      name: 'Done'
-    }
+      name: 'Done',
+    },
   ];
 
   const onDragEnd = (result: DropResult) => {
@@ -32,14 +45,24 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
 
     const changedTasks = tasks.map((task) => {
       if (task.id.toString() === result.draggableId) {
-        return { ...task, status: result.destination?.droppableId as TaskModel['status'] };
+        return {
+          ...task,
+          status: result.destination?.droppableId as TaskModel['status'],
+        };
       }
       return task;
     });
 
-    const movedTask = changedTasks.find((task) => task.id.toString() === result.draggableId);
-    const tasksWithoutMovedTask = changedTasks.filter((task) => task.id.toString() !== result.draggableId);
-    const tasksWithMovedTask = tasksWithoutMovedTask.slice(0, result.destination.index).concat(movedTask as TaskModel).concat(tasksWithoutMovedTask.slice(result.destination.index));
+    const movedTask = changedTasks.find(
+      (task) => task.id.toString() === result.draggableId,
+    );
+    const tasksWithoutMovedTask = changedTasks.filter(
+      (task) => task.id.toString() !== result.draggableId,
+    );
+    const tasksWithMovedTask = tasksWithoutMovedTask
+      .slice(0, result.destination.index)
+      .concat(movedTask as TaskModel)
+      .concat(tasksWithoutMovedTask.slice(result.destination.index));
 
     setTasks(tasksWithMovedTask);
   };
@@ -52,31 +75,34 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
             <s.Title>{status.name}</s.Title>
             <Droppable droppableId={status.id}>
               {(provided) => (
-                <>
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
-                    {provided.placeholder}
-                  </div>
-                  {tasks.map((task, index) => (
-                    task.status === status.id && (
-                      <Draggable key={task.id} draggableId={task.id.toString()} index={index}>
-                        {(provided) => (
-                          <div
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            <CustomCard
-                              onClick={() => openEditModal(task.id)}
-                              index={index}
-                              task={task}
-                              remove={(id, event) => remove(id, event)}
-                            />
-                          </div>
-                        )}
-                      </Draggable>
-                    )
-                  ))}
-                </>
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {tasks.map(
+                    (task, index) =>
+                      task.status === status.id && (
+                        <Draggable
+                          key={task.id}
+                          draggableId={task.id.toString()}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <s.DraggableCard
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              <CustomCard
+                                onClick={() => openEditModal(task.id)}
+                                index={index}
+                                task={task}
+                                remove={(id, event) => remove(id, event)}
+                              />
+                            </s.DraggableCard>
+                          )}
+                        </Draggable>
+                      ),
+                  )}
+                  {provided.placeholder}
+                </div>
               )}
             </Droppable>
           </s.DroppableTasksContainer>
@@ -85,3 +111,5 @@ export const TasksDroppable = ({ tasks, setTasks, openEditModal, remove }: Tasks
     </s.DroppableTasks>
   );
 };
+
+export default TasksDroppable;

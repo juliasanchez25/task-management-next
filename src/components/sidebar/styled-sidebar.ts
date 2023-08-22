@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { ChevronLeft } from '@mui/icons-material';
-import theme from '@/theme/theme';
 import { pxToRem } from '@/utils/px-to-rem';
 
 export const Container = styled.div`
@@ -13,7 +12,7 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  background-color: ${theme.background};
+  background-color: ${({ theme }) => theme.background};
   overflow-x: hidden;
   box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.25);
 `;
@@ -26,7 +25,6 @@ export const Navigation = styled.nav<{ open?: boolean }>`
   align-items: center;
   transition: 0.5s;
   width: ${pxToRem(90)};
-
   ${({ open }) => open && `width: ${pxToRem(200)}`}
 `;
 
@@ -34,21 +32,21 @@ export const Toggle = styled(ChevronLeft)<{ open?: boolean }>`
   transition: transform 0.5s;
   cursor: pointer;
   transform: rotate(180deg);
-  color: ${theme.title};
+  color: ${({ theme }) => theme.title};
 
   ${({ open }) => open && 'transform: rotate(0deg);'}
 `;
 
 export const Title = styled.h1<{ open?: boolean }>`
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: ${pxToRem(12)};
-  background-color: ${theme.purple};
-  color: ${theme.offWhite};
-  border-radius: 100%;
+  background-color: ${({ theme }) => theme.purple};
+  color:  ${({ theme }) => theme.title};
+  border-radius: 50%;
   width: ${pxToRem(24)};
   height: ${pxToRem(24)};
-
-  ${({ open }) => open && `width: ${pxToRem(200)};`}
 `;
 
 export const Menu = styled.ul`
@@ -58,11 +56,11 @@ export const Menu = styled.ul`
   align-items: center;
   gap: 20px;
   list-style: none;
-  color: ${theme.title};
+  color: ${({ theme }) => theme.title};
 `;
 
 export const Link = styled.li<{ open?: boolean }>`
-  ${({ open }) => open ? `
+  ${({ open, theme }) => open ? `
     position: relative;
     display: flex;
     align-items: center;

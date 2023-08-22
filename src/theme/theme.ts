@@ -1,5 +1,6 @@
 export const lightModeTheme = {
-  background: '#f3f5f9',
+  mainBackground: '#f3f5f9',
+  background: '#ffffff',
   purple: '#9854cb',
   lightPurple: '#d7a2ff',
   offWhite: '#fcfbff',
@@ -20,6 +21,7 @@ export const lightModeTheme = {
 };
 
 export const darkModeTheme = {
+  mainBackground: '#242424',
   background: '#333333',
   purple: '#6a4198',
   lightPurple: '#8c72cc',
@@ -39,9 +41,3 @@ export const darkModeTheme = {
   pink: '#932f6f',
   lightPink: '#b28ca3',
 };
-
-const chooseThemeToExport = () => {
-  return darkModeTheme;
-};
-
-export default chooseThemeToExport();

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styles from './../../styles/pages/components/ProgressCard.module.scss';
 import * as s from './styled-progresscard';
 
 const progresses = [
@@ -7,19 +6,19 @@ const progresses = [
     date: 'Ago 08, 2023',
     taskTitle: 'Criar landing page',
     taskCurrentStatus: 'Completed',
-    progress: 100
+    progress: 100,
   },
   {
     date: 'Ago 08, 2023',
     taskTitle: 'Criar landing page',
     taskCurrentStatus: 'Doing',
-    progress: 50
+    progress: 50,
   },
   {
     date: 'Ago 08, 2023',
     taskTitle: 'Criar landing page',
     taskCurrentStatus: 'Doing',
-    progress: 20
+    progress: 20,
   },
 ];
 

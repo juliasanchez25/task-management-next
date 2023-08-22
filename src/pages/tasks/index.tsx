@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
-import styles from './../../styles/pages/tasks/index.module.scss';
-import { TasksDroppable } from './components/tasks-droppable/TasksDroppable';
+import TasksDroppable from './components/tasks-droppable/TasksDroppable';
 import { TaskModel } from '@/models/Task';
-import { NewTaskModal } from './components/new-task-modal/NewTaskModal';
-import { EditTaskModal } from './components/edit-task-modal/EditTaskModal';
-import { RemoveTaskModal } from './components/remove-task-modal/RemoveTaskModal';
+import { NewTaskModal } from './components/NewTaskModal';
+import { EditTaskModal } from './components/EditTaskModal';
+import RemoveTaskModal from './components/remove-task-modal/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
 import { Search } from '@mui/icons-material';
 import imageNotFound from '../../../public/assets/images/not-found.png';
 import * as s from './styled-tasks-index';
+import useDebounce from '@/hooks/useDebounce';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
@@ -20,6 +20,7 @@ const Tasks = () => {
   const [taskToRemove, setTaskToRemove] = useState<TaskModel>();
   const [removeModal, setRemoveModal] = useState<boolean>(false);
   const [search, setSearch] = useState('');
+  const debouncedValue = useDebounce(search, 500);
 
   const createTask = () => {
     setNewModal(true);
@@ -45,8 +46,10 @@ const Tasks = () => {
   };
 
   const getSearchTasks = useMemo(() => {
-    return tasks.filter(task => task.title.toLowerCase().includes(search.toLowerCase()));
-  }, [search, tasks]);
+    return tasks.filter((task) =>
+      task.title.toLowerCase().includes(debouncedValue.toLowerCase()),
+    );
+  }, [debouncedValue, tasks]);
 
   useEffect(() => {
     setTasks(taskService.getTask());
@@ -62,14 +65,16 @@ const Tasks = () => {
         <s.MainTitle>Minhas tarefas</s.MainTitle>
         <s.SearchBox>
           <s.SearchInput
-            type='text'
-            placeholder='Pesquisar tarefa...'
+            type="text"
+            placeholder="Pesquisar tarefa..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Search className={styles['main__search-box__icon']} />
+          <Search />
         </s.SearchBox>
-        <s.CreateTaskButton onClick={createTask}>Criar nova tarefa</s.CreateTaskButton>
+        <s.CreateTaskButton onClick={createTask}>
+          Criar nova tarefa
+        </s.CreateTaskButton>
       </s.Main>
       <NewTaskModal open={newModal} setOpen={setNewModal} setTasks={setTasks} />
       {taskToEdit && (
@@ -93,13 +98,13 @@ const Tasks = () => {
           tasks={getSearchTasks}
           setTasks={setTasks}
           openEditModal={editTask}
-          remove={(id: number, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => removeTask(id, event)}
+          remove={(
+            id: number,
+            event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+          ) => removeTask(id, event)}
         />
       ) : (
-        <div className={styles['empty-tasks']}>
-          <h2 className={styles['empty-tasks__title']}>Nenhuma tarefa encontrada 🙁</h2>
-          <Image className={styles['empty-tasks__image']} src={imageNotFound} alt='Imagem de mulher segurando uma lupa' />
-        </div>
+        <h2>Nenhuma tarefa encontrada</h2>
       )}
     </>
   );

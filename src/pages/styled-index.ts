@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import theme from '@/theme/theme';
+import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
 
 export const Main = styled.main`
@@ -10,21 +9,29 @@ export const Main = styled.main`
     align-items: center;
     border-radius: 20px;
     width: 80%;
-    background-color: ${theme.background};
+    background-color: ${({ theme }) => theme.background};
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+    }
 `;
 
 export const Title = styled.h1`
     margin-bottom: 0;
     font-size: ${pxToRem(40)};
     font-weight: 600;
-    color: ${theme.title};
+    color: ${({ theme }) => theme.title};
 `;
 
 export const Description = styled.p`
     margin-top: ${pxToRem(15)};
     font-size: ${pxToRem(20)};
     font-weight: 400;
-    color: ${theme.description};
+    color: ${({ theme }) => theme.description};
 `;
 
 export const Button = styled.button`
@@ -35,8 +42,8 @@ export const Button = styled.button`
     border: none;
     outline: none;
     border-radius: 10px;
-    background-color: ${theme.purple};
-    color: ${theme.offWhite};
+    background-color: ${({ theme }) => theme.purple};
+    color:  ${({ theme }) => theme.offWhite};
     font-size: ${pxToRem(18)};
     font-weight: 500;
     cursor: pointer;
@@ -51,4 +58,20 @@ export const Button = styled.button`
     transform: translateY(0);
     box-shadow: rgba(152, 84, 203, 0.8) 0px 0px 0px;
     }
+`;
+
+export const ProgressCardsArea = styled.div`
+  margin-top: ${pxToRem(50)};
+  display: flex;
+  gap: 2rem;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;

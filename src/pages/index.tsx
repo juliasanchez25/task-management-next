@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import styles from './../styles/pages/index.module.scss';
 import ProgressCard from './components/ProgressCard';
@@ -12,14 +13,18 @@ const Index = () => {
         <div>
           <s.Title>Tarefas</s.Title>
           <s.Description>Explore todas as tarefas pendentes e priorize suas atividades com eficiência!</s.Description>
-          <s.Button>Minhas tarefas</s.Button>
+          <Link href={'/tasks'}>
+            <s.Button>Minhas tarefas</s.Button>
+          </Link>
         </div>
-        <Image src={imageTimeManagement} alt='Time Management' className={styles['main__image']} />
+        {/*         <s.ImageWrapper>
+          <Image src={imageTimeManagement} alt='Time Management' />
+        </s.ImageWrapper> */}
       </s.Main>
 
-      <section className={styles['progress-cards-area']}>
+      <s.ProgressCardsArea>
         <ProgressCard />
-      </section>
+      </s.ProgressCardsArea>
     </>
   );
 };

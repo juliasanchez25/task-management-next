@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
-import theme from '@/theme/theme';
 
 type TaskType = 'personal' | 'work';
 
@@ -20,8 +19,8 @@ export const CardTag = styled.div<CardTagProps>`
   height: ${pxToRem(28)};
   font-size: ${pxToRem(14)};
   font-weight: 600;
-  color: ${theme.blue};
+  color: ${({ theme }) => theme.blue};
   border-radius: 50px;
-  background-color: ${({ type }) => type === 'personal' ? theme.lightBlue : theme.lightPurple};
-  color: ${({ type }) => type === 'personal' ? theme.blue : theme.purple};
+  background-color: ${({ type, theme }) => type === 'personal' ? theme.lightBlue : theme.lightPurple};
+  color: ${({ type, theme }) => type === 'personal' ? theme.blue : theme.purple};
 `;

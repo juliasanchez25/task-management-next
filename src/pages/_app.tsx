@@ -1,30 +1,36 @@
-import { useState } from 'react';
-import Sidebar from '@/components/sidebar/Sidebar';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useCallback, useEffect, useState } from 'react';
+import { Sidebar } from '@/components/sidebar/Sidebar';
 import './../styles/globals.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Nightlight, LightMode } from '@mui/icons-material';
+import { ThemeProvider } from 'styled-components';
+import { lightModeTheme, darkModeTheme } from '../theme/theme';
+import { GlobalStyles } from '@/theme/global-styles';
 
 export default function App({ Component, pageProps }: any) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [theme, setTheme] = useState('light');
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark-mode');
-  };
+  const toggleTheme = useCallback(() => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+  }, [theme]);
+
+  useEffect(() => {
+    toggleTheme();
+  }, []);
 
   return (
-    <>
-      <ToastContainer />
-      <div className='page-content'>
-        <button onClick={toggleTheme} className='theme-toggle'>
-          {isDarkMode ? <LightMode /> : <Nightlight />}
-        </button>
-        <Sidebar />
-        <div>
-          <Component {...pageProps} />
+    <ThemeProvider theme={theme === 'light' ? lightModeTheme : darkModeTheme}>
+      <GlobalStyles />
+      <>
+        <ToastContainer />
+        <div className="page-content">
+          <Sidebar theme={theme} toggleTheme={toggleTheme} />
+          <div>
+            <Component {...pageProps} />
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </ThemeProvider>
   );
 }
