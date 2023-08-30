@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
+import Head from 'next/head';
 import TasksDroppable from './components/tasks-droppable/TasksDroppable';
 import { TaskModel } from '@/models/Task';
 import { NewTaskModal } from './components/NewTaskModal';
@@ -7,8 +8,7 @@ import { EditTaskModal } from './components/EditTaskModal';
 import RemoveTaskModal from './components/remove-task-modal/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import { toast } from 'react-toastify';
-import { Search } from '@mui/icons-material';
-import imageNotFound from '../../../public/assets/images/not-found.png';
+import imageNotFound from '../../../public/assets/images/not-found.svg';
 import * as s from './styled-tasks-index';
 import useDebounce from '@/hooks/useDebounce';
 
@@ -61,6 +61,11 @@ const Tasks = () => {
 
   return (
     <>
+      <Head>
+        <title>Tarefas | Task Manager</title>
+        <meta name="description" content="Explore todas as tarefas pendentes e priorize suas atividades com eficiência!" />
+        <link rel="icon" href="../../public/favicon.ico" />
+      </Head>
       <s.Main>
         <s.MainTitle>Minhas tarefas</s.MainTitle>
         <s.SearchBox>
@@ -70,7 +75,7 @@ const Tasks = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Search />
+          <s.SearchIcon />
         </s.SearchBox>
         <s.CreateTaskButton onClick={createTask}>
           Criar nova tarefa
@@ -104,7 +109,10 @@ const Tasks = () => {
           ) => removeTask(id, event)}
         />
       ) : (
-        <h2>Nenhuma tarefa encontrada</h2>
+        <s.Empty>
+          <Image src={imageNotFound} alt="Nenhuma tarefa encontrada" />
+          <p>Nada aqui ainda! Que tal adicionar algo?</p>
+        </s.Empty>
       )}
     </>
   );

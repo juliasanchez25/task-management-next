@@ -35,11 +35,9 @@ const CustomCard = ({ task, onClick, remove }: CardProps) => {
     if (status.late) {
       return 'Atrasado';
     }
-
     if (status.today) {
       return 'Hoje';
     }
-
     if (status.inTime) {
       return 'Em dia';
     }
@@ -56,7 +54,7 @@ const CustomCard = ({ task, onClick, remove }: CardProps) => {
             <s.ScheduleIcon />
             <p>{handleTaskEndAt()}</p>
           </s.TaskDue>
-          <MoreHoriz htmlColor="#d1d1d1" />
+          <s.MoreHorizIcon />
         </s.CardTop>
         <s.CardTitle>{task.title}</s.CardTitle>
         <s.DatesActions>
@@ -66,7 +64,7 @@ const CustomCard = ({ task, onClick, remove }: CardProps) => {
           <s.Actions>
             <Tooltip title="Editar tarefa">
               <IconButton onClick={onClick} size="small">
-                <EditNote />
+                <s.EditNoteIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Excluir tarefa">
@@ -76,7 +74,7 @@ const CustomCard = ({ task, onClick, remove }: CardProps) => {
                 }}
                 size="small"
               >
-                <Delete />
+                <s.DeleteIcon />
               </IconButton>
             </Tooltip>
           </s.Actions>

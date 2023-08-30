@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
+import { Search } from '@mui/icons-material';
 
 export const Main = styled.main`
   padding: ${pxToRem(20)} ${pxToRem(30)};
@@ -69,4 +70,23 @@ export const CreateTaskButton = styled.button`
     transform: translateY(0);
     box-shadow: rgba(152, 84, 203, 0.8) 0px 0px 0px;
   }
+`;
+
+export const Empty = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-right: ${pxToRem(165)};
+
+  p {
+    font-size: ${pxToRem(20)};
+    color: ${({ theme }) => theme.title};
+    margin-left: ${pxToRem(15)};
+  }
+`;
+
+export const SearchIcon = styled(Search)`
+  color: ${({ theme }) => theme.title};
 `;

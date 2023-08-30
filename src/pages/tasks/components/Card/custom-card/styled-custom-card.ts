@@ -1,6 +1,7 @@
+/* eslint-disable indent */
 import { pxToRem } from '@/utils/px-to-rem';
 import styled from 'styled-components';
-import { Schedule } from '@mui/icons-material';
+import { Schedule, Delete, MoreHoriz, EditNote } from '@mui/icons-material';
 import { Card, CardActions, CardContent } from '@mui/material';
 
 export const Container = styled(Card)`
@@ -11,7 +12,7 @@ export const Container = styled(Card)`
   width: ${pxToRem(348)};
   max-width: 100%;
   height: auto;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.background} !important;
   color: ${({ theme }) => theme.title};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -19,6 +20,11 @@ export const Container = styled(Card)`
 export const CardTop = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+export const MoreHorizIcon = styled(MoreHoriz)`
+  font-size: ${pxToRem(20)};
+  color: ${({ theme }) => theme.icons};
 `;
 
 export const Content = styled(CardContent)`
@@ -36,20 +42,28 @@ export const TaskDue = styled.div<{ status: 'late' | 'today' | 'inTime' }>`
   height: ${pxToRem(30)};
   border-radius: 18px;
   gap: ${pxToRem(5)};
-  background-color: ${props => {
+  background-color: ${(props) => {
     switch (props.status) {
-    case 'late': return props.theme.lightRed;
-    case 'today': return props.theme.yellow;
-    case 'inTime': return props.theme.lightGreen;
-    default: return 'transparent';
+      case 'late':
+        return props.theme.lightRed;
+      case 'today':
+        return props.theme.yellow;
+      case 'inTime':
+        return props.theme.lightGreen;
+      default:
+        return 'transparent';
     }
   }};
-  color: ${props => {
+  color: ${(props) => {
     switch (props.status) {
-    case 'late': return props.theme.red;
-    case 'today': return props.theme.orange;
-    case 'inTime': return props.theme.green;
-    default: return 'inherit';
+      case 'late':
+        return props.theme.red;
+      case 'today':
+        return props.theme.orange;
+      case 'inTime':
+        return props.theme.green;
+      default:
+        return 'inherit';
     }
   }};
 
@@ -65,6 +79,7 @@ export const TaskDue = styled.div<{ status: 'late' | 'today' | 'inTime' }>`
 
 export const CardTitle = styled.h3`
   font-size: ${pxToRem(17)};
+  color: ${({ theme }) => theme.title};
 `;
 
 export const ScheduleIcon = styled(Schedule)`
@@ -84,4 +99,14 @@ export const Dates = styled.div`
 export const Actions = styled(CardActions)`
   display: flex;
   justify-content: flex-end;
+`;
+
+export const DeleteIcon = styled(Delete)`
+  font-size: ${pxToRem(16)};
+  color: ${({ theme }) => theme.icons};
+`;
+
+export const EditNoteIcon = styled(EditNote)`
+  font-size: ${pxToRem(16)};
+  color: ${({ theme }) => theme.icons};
 `;

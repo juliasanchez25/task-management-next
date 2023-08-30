@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
-import { Box, TextareaAutosize } from '@mui/material';
+import { Box, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from '@mui/material';
 
 export const BoxContainer = styled(Box)`
   position: absolute;
@@ -19,6 +19,7 @@ export const BoxContainer = styled(Box)`
 
 export const Top = styled.div`
   display: flex;
+  margin-bottom: ${pxToRem(20)};
 `;
 
 export const Title = styled.h3`
@@ -28,6 +29,7 @@ export const Title = styled.h3`
 
 export const CloseButton = styled.button`
   position: absolute;
+  padding-bottom: ${pxToRem(75)};
   margin-right: ${pxToRem(15)};
   background: none;
   border: none;
@@ -36,23 +38,11 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-export const Textarea = styled(TextareaAutosize)`
-  margin: ${pxToRem(12)} 0;
-  padding: ${pxToRem(10)} ${pxToRem(10)};
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.title};
-  border: 1px solid ${({ theme }) => theme.gray};
-  outline: none;
-  border-radius: 5px;
-  background-color: transparent;
-`;
-
 export const Label = styled.label`
   margin-bottom: -15px;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: ${pxToRem(12)};
-  color: rgba(0, 0, 0, 0.6);
+  color: ${({ theme }) => theme.inputLabel};
 `;
 
 export const CreateButton = styled.button`
@@ -77,3 +67,76 @@ export const CreateButton = styled.button`
     box-shadow: rgba(47, 128, 237, 0.8) 0px 0px 0px;
   }
 `;
+
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+  input: {
+    color: theme.label,
+  },
+  '& label.Mui-focused': {
+    color: `${theme.inputLabelFocus} !important`,
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: `${theme.input} !important`,
+  },
+  '& .MuiInputLabel-root': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: `${theme.input} !important`,
+    },
+    '&:hover fieldset': {
+      borderColor: `${theme.title} !important`,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: `${theme.inputLabelFocus} !important`,
+    },
+  },
+  '& .MuiOutlinedInput-input': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiOutlinedInput-multiline': {
+    color: `${theme.inputLabel} !important`,
+  },
+}));
+
+export const StyledSelect = styled(Select)(({ theme }) => ({
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderWidth: '1px !important',
+    borderColor: `${theme.input} !important`,
+  },
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderWidth: '2px !important',
+    borderColor: `${theme.inputLabelFocus} !important`,
+  },
+  '& .MuiInputLabel-outlined': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiSelect-root': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiSelect-select': {
+    color: `${theme.inputLabel} !important`,
+
+    '&:focus': {
+      backgroundColor: 'transparent',
+    },
+  },
+  '& .MuiSelect-icon': {
+    color: `${theme.input} !important`,
+  },
+  '&.Mui-focused .MuiSelect-icon': {
+    color: `${theme.inputLabelFocus} !important`,
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: `${theme.title} !important`,
+  },
+}));
+
+export const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+  color: `${theme.inputLabel} !important`,
+
+  '&.Mui-focused': {
+    color: `${theme.inputLabelFocus} !important`,
+  },
+}));

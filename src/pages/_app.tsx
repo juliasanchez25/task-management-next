@@ -7,16 +7,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from 'styled-components';
 import { lightModeTheme, darkModeTheme } from '../theme/theme';
 import { GlobalStyles } from '@/theme/global-styles';
+import { ThemeService } from '@/services/ThemeService';
 
 export default function App({ Component, pageProps }: any) {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(ThemeService.getTheme());
+  const [isMounted, setIsMounted] = useState(false);
 
   const toggleTheme = useCallback(() => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+    setTheme(theme === 'light' ? 'dark' : 'light');
   }, [theme]);
 
   useEffect(() => {
-    toggleTheme();
+    ThemeService.setTheme(theme);
+  }, [theme]);
+
+  useEffect(() => {
+    setIsMounted(true);
   }, []);
 
   return (
@@ -25,10 +31,14 @@ export default function App({ Component, pageProps }: any) {
       <>
         <ToastContainer />
         <div className="page-content">
-          <Sidebar theme={theme} toggleTheme={toggleTheme} />
-          <div>
-            <Component {...pageProps} />
-          </div>
+          {isMounted && (
+            <>
+              <Sidebar theme={theme} toggleTheme={toggleTheme} />
+              <div>
+                <Component {...pageProps} />
+              </div>
+            </>
+          )}
         </div>
       </>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-import { FormControl, Input, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
@@ -64,15 +64,30 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
               <Close />
             </s.CloseButton>
           </s.Top>
-          <TextField required label="Título da tarefa" type="text" id="standard-required" variant="standard" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <s.Textarea placeholder="Descrição da tarefa" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <s.StyledTextField
+            id="standard-required"
+            label="Título da tarefa"
+            type="text"
+            variant="outlined"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <s.StyledTextField
+            placeholder="Descrição da tarefa"
+            value={description}
+            type="text"
+            variant="outlined"
+            onChange={(e) => setDescription(e.target.value)}
+            multiline
+          />
           <FormControl>
-            <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
-            <Select
+            <s.StyledInputLabel id="demo-simple-select-label">Categoria</s.StyledInputLabel>
+            <s.StyledSelect
               required
               label="Categoria"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
+              variant="outlined"
               value={type}
               onChange={(e) => setType(e.target.value as TaskModel['type'])}
             >
@@ -81,10 +96,14 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
                   {label}
                 </MenuItem>
               ))}
-            </Select>
+            </s.StyledSelect>
           </FormControl>
           <s.Label>Data de entrega</s.Label>
-          <Input type="date" value={dayjs(endAt).format('YYYY-MM-DD')} onChange={(e) => setEndAt(dayjs(e.target.value).toDate())} />
+          <s.StyledTextField
+            type="date"
+            value={dayjs(endAt).format('YYYY-MM-DD')}
+            onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
+          />
           <s.CreateButton onClick={handleCreate}>Criar tarefa</s.CreateButton>
         </s.BoxContainer>
       </Modal>

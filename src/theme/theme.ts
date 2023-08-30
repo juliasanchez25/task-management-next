@@ -18,6 +18,10 @@ export const lightModeTheme = {
   orange: '#e99517',
   pink: '#c55090',
   lightPink: '#f5b6d6',
+  input: '#0000003b',
+  inputLabel: '#00000de',
+  inputLabelFocus: '#2f80ed',
+  icons: '#0000008a',
 };
 
 export const darkModeTheme = {
@@ -40,4 +44,8 @@ export const darkModeTheme = {
   orange: '#b56c11',
   pink: '#932f6f',
   lightPink: '#b28ca3',
+  input: '#434343',
+  inputLabel: '#b0b0b0',
+  inputLabelFocus: '#fffffff',
+  icons: '#a3a2a2',
 };
