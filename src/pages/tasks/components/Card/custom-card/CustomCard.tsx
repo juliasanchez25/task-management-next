@@ -1,5 +1,4 @@
 import { TaskModel } from '@/models/Task';
-import { Delete, MoreHoriz, EditNote } from '@mui/icons-material';
 import { IconButton, Tooltip } from '@mui/material';
 import Tag from '../task-type-tag/TaskTypeTag';
 import TaskDates from '../task-dates/TaskDates';

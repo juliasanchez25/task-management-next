@@ -43,7 +43,7 @@ export const Button = styled.button`
 
 export const ConfirmButton = styled(Button)`
   background-color: #ff6363;
-  color: ${({ theme }) => theme.title};
+  color: #ffffff;
 
   &:hover {
     background-color: #f74b4b;

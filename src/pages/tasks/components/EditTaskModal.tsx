@@ -1,6 +1,6 @@
-import { FormControl, Input, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
@@ -19,11 +19,21 @@ type EditTaskModalProps = {
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
-export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: EditTaskModalProps) => {
+export const EditTaskModal = ({
+  open,
+  task,
+  setOpen,
+  setTasks,
+  setTaskToEdit,
+}: EditTaskModalProps) => {
   const [title, setTitle] = useState<string>(task.title || '');
-  const [description, setDescription] = useState<string>(task.description || '');
+  const [description, setDescription] = useState<string>(
+    task.description || '',
+  );
   const [type, setType] = useState<TaskModel['type']>(task.type || 'personal');
-  const [endAt, setEndAt] = useState<Date>(task.endAt || dayjs().add(1, 'day').toDate());
+  const [endAt, setEndAt] = useState<Date>(
+    task.endAt || dayjs().add(1, 'day').toDate(),
+  );
   const tasksTypes = [
     { value: 'work', label: 'Trabalho' },
     { value: 'personal', label: 'Pessoal' },
@@ -84,7 +94,9 @@ export const EditTaskModal = ({ open, task, setOpen, setTasks, setTaskToEdit }: 
             multiline
           />
           <FormControl>
-            <s.StyledInputLabel id="demo-simple-select-label">Categoria</s.StyledInputLabel>
+            <s.StyledInputLabel id="demo-simple-select-label">
+              Categoria
+            </s.StyledInputLabel>
             <s.StyledSelect
               required
               label="Categoria"

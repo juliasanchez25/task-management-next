@@ -5,7 +5,7 @@ type TaskType = 'personal' | 'work';
 
 type CardTagProps = {
   type: TaskType;
-}
+};
 
 export const CardTagContainer = styled.div`
   display: flex;
@@ -21,6 +21,8 @@ export const CardTag = styled.div<CardTagProps>`
   font-weight: 600;
   color: ${({ theme }) => theme.blue};
   border-radius: 50px;
-  background-color: ${({ type, theme }) => type === 'personal' ? theme.lightBlue : theme.lightPurple};
-  color: ${({ type, theme }) => type === 'personal' ? theme.blue : theme.purple};
+  background-color: ${({ type, theme }) =>
+    type === 'personal' ? theme.lightBlue : theme.lightPurple};
+  color: ${({ type, theme }) =>
+    type === 'personal' ? theme.blue : theme.purple};
 `;

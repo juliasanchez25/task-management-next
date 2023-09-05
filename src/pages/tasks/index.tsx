@@ -63,8 +63,11 @@ const Tasks = () => {
     <>
       <Head>
         <title>Tarefas | Task Manager</title>
-        <meta name="description" content="Explore todas as tarefas pendentes e priorize suas atividades com eficiência!" />
-        <link rel="icon" href="../../public/favicon.ico" />
+        <meta
+          name="description"
+          content="Explore todas as tarefas pendentes e priorize suas atividades com eficiência!"
+        />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <s.Main>
         <s.MainTitle>Minhas tarefas</s.MainTitle>

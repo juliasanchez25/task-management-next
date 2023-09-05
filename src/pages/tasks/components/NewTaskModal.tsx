@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { useState } from 'react';
 import { TaskModel } from '@/models/Task';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
@@ -17,7 +17,11 @@ type NewTaskModalProps = {
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
-export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => {
+export const NewTaskModal = ({
+  open,
+  setOpen,
+  setTasks,
+}: NewTaskModalProps) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [type, setType] = useState<TaskModel['type']>('personal');
@@ -81,7 +85,9 @@ export const NewTaskModal = ({ open, setOpen, setTasks }: NewTaskModalProps) => 
             multiline
           />
           <FormControl>
-            <s.StyledInputLabel id="demo-simple-select-label">Categoria</s.StyledInputLabel>
+            <s.StyledInputLabel id="demo-simple-select-label">
+              Categoria
+            </s.StyledInputLabel>
             <s.StyledSelect
               required
               label="Categoria"

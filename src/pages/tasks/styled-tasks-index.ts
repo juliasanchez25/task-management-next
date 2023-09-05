@@ -55,7 +55,7 @@ export const CreateTaskButton = styled.button`
   outline: none;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.purple};
-  color:  ${({ theme }) => theme.offWhite};
+  color: ${({ theme }) => theme.offWhite};
   font-size: ${pxToRem(16)};
   font-weight: 400;
   cursor: pointer;

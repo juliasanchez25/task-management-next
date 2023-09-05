@@ -43,7 +43,7 @@ export const Title = styled.h1<{ open?: boolean }>`
   align-items: center;
   padding: ${pxToRem(12)};
   background-color: ${({ theme }) => theme.purple};
-  color:  ${({ theme }) => theme.title};
+  color: #ffffff;
   border-radius: 50%;
   width: ${pxToRem(24)};
   height: ${pxToRem(24)};
@@ -60,7 +60,9 @@ export const Menu = styled.ul`
 `;
 
 export const Link = styled.li<{ open?: boolean }>`
-  ${({ open, theme }) => open ? `
+  ${({ open, theme }) =>
+    open
+      ? `
     position: relative;
     display: flex;
     align-items: center;
@@ -87,7 +89,8 @@ export const Link = styled.li<{ open?: boolean }>`
       transform: scaleX(1);
       transform-origin: bottom left;
     }
-  ` : `
+  `
+      : `
     cursor: pointer;
 
     svg {

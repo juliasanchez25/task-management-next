@@ -5,7 +5,7 @@ type TaskType = 'personal' | 'work';
 
 type TagParams = {
   type: TaskType;
-}
+};
 
 const TaskTypeTag = ({ type }: TagParams) => {
   const tag = {

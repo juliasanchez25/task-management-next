@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
 
+export const LastTasksTitle = styled.h2`
+  margin-top: ${pxToRem(50)};
+  font-size: ${pxToRem(30)};
+  font-weight: 600;
+  color: ${({ theme }) => theme.title};
+`;
+
+export const Container = styled.div`
+  margin-top: ${pxToRem(20)};
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
+
 export const Card = styled.div`
   padding: ${pxToRem(10)} ${pxToRem(25)};
   width: ${pxToRem(304)};
@@ -36,18 +50,17 @@ export const ProgressContainer = styled.div`
   font-size: ${pxToRem(16)};
   font-weight: 400;
   color: ${({ theme }) => theme.title};
+  width: 100%;
+  border-radius: 20px;
+  background-color: #f3f3f3;
 `;
 
-export const ProgressBar = styled.div<{ animate?: boolean }>`
-  height: 100%;
-  background-color: ${({ theme }) => theme.purple};
-  content: '';
-
-  ${({ animate }) =>
-    animate &&
-    `
-        animation: progressBarAnimation 1.5s ease-in-out forwards;
-    `}
+export const ProgressBar = styled.div<{ width: number; animate: boolean }>`
+  background-color: #4caf50;
+  width: ${(props) => (props.animate ? `${props.width}%` : '0%')};
+  height: ${pxToRem(10)};
+  border-radius: 20px;
+  transition: width 1s ease-in-out;
 `;
 
 export const ProgressStatus = styled.div`

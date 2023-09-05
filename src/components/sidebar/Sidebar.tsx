@@ -54,7 +54,12 @@ export const Sidebar = ({ theme, toggleTheme }: SidebarProps) => {
           </s.Title>
           <s.Menu>
             {routes.map((route) => (
-              <s.Link style={currentRoute === route.path ? { color: '#9854cb' } : {}} key={route.name} onClick={() => goToPage(route.path)} open={isOpen}>
+              <s.Link
+                style={currentRoute === route.path ? { color: '#9854cb' } : {}}
+                key={route.name}
+                onClick={() => goToPage(route.path)}
+                open={isOpen}
+              >
                 {isOpen ? route.name : route.icon}
               </s.Link>
             ))}
