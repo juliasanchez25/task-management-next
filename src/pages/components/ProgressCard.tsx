@@ -19,8 +19,14 @@ const ProgressCard = () => {
     date: dayjs(task.createdAt).format('MMM DD, YYYY'),
     taskTitle: task.title,
     taskCurrentStatus: task.status,
-    progress: task.status === 'todo' ? 20 : task.status === 'doing' ? 50 : 100,
+    progress: task.status === 'todo' ? 0 : task.status === 'doing' ? 50 : 100,
   }));
+
+  const statusDisplay = {
+    todo: 'To Do',
+    doing: 'Doing',
+    done: 'Done',
+  };
 
   useEffect(() => {
     setAnimate(true);
@@ -36,7 +42,7 @@ const ProgressCard = () => {
             <s.Date>{progress.date}</s.Date>
             <s.TaskTitle>{progress.taskTitle}</s.TaskTitle>
             <s.TaskCurrentStatus>
-              {progress.taskCurrentStatus}
+              {statusDisplay[progress.taskCurrentStatus]}
             </s.TaskCurrentStatus>
             <s.ProgressContainer>
               <s.ProgressBar width={progress.progress} animate={animate} />

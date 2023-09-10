@@ -3,6 +3,7 @@ import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { TaskModel } from '@/models/Task';
 import { toast } from 'react-toastify';
+import useKeypress from '../../../hooks/useKeypress';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
@@ -41,6 +42,12 @@ export const NewTaskModal = ({
     resetFields();
     setOpen(false);
   };
+
+  useKeypress('Escape', () => {
+    if (open) {
+      setOpen(false);
+    }
+  });
 
   const handleCreate = () => {
     const task: TaskModel = {

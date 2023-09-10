@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
-import {
-  Box,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  TextareaAutosize,
-} from '@mui/material';
+import { Box, InputLabel, Select, TextField } from '@mui/material';
 
 export const BoxContainer = styled(Box)`
   position: absolute;

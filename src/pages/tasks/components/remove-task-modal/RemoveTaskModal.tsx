@@ -1,4 +1,5 @@
 import { Modal } from '@mui/material';
+import useKeypress from '../../../../hooks/useKeypress';
 import * as s from './styled-remove-task-modal';
 
 type RemoveTaskModalProps = {
@@ -12,6 +13,12 @@ const RemoveTaskModal = ({
   onClickConfirm,
   setOpen,
 }: RemoveTaskModalProps) => {
+  useKeypress('Escape', () => {
+    if (open) {
+      setOpen(false);
+    }
+  });
+
   return (
     <>
       <Modal open={open}>
