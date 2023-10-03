@@ -3,7 +3,7 @@ import timeManagement from '../../../../public/assets/images/time-management.png
 
 import ProgressCard from '@/pages/components/progress-card/ProgressCard';
 import Calendar from '@/pages/components/calendar/Calendar';
-import LastActivities from '@/pages/components/last-activities/LastActivities';
+import TodayTasks from '@/pages/components/today-tasks/TodayTasks';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
@@ -41,7 +41,7 @@ export const Home = () => {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-          <LastActivities
+          <TodayTasks
             selectedDayTasks={selectedDayTasks}
             setSelectedDayTasks={setSelectedDayTasks}
             selectedDate={selectedDate}

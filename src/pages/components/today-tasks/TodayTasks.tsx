@@ -4,17 +4,17 @@ import * as s from './styled-today-tasks';
 import { TaskModel } from '@/models/Task';
 import dayjs, { Dayjs } from 'dayjs';
 
-type LastActivities = {
+type TTodayTasks = {
   selectedDayTasks: TaskModel[];
   setSelectedDayTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   selectedDate: Dayjs;
 }
 
-const LastActivities = ({
+const TodayTasks = ({
   selectedDayTasks,
   selectedDate,
   setSelectedDayTasks
-}: LastActivities) => {
+}: TTodayTasks) => {
   const allTasks = TasksService.getTask();
 
   useEffect(() => {
@@ -40,4 +40,4 @@ const LastActivities = ({
   );
 };
 
-export default LastActivities;
+export default TodayTasks;
