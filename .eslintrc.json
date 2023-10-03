@@ -12,6 +12,11 @@
     "semi": [
       "error",
       "always"
+    ],
+    "no-unused-vars": "error",
+    "sort-imports": [
+      "error",
+      "always"
     ]
   }
 }
