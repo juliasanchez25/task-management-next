@@ -31,7 +31,7 @@ export const DraggableCard = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: ${pxToRem(24)};
-  font-weight: 600;
+  font-size: ${pxToRem(18)};
+  font-weight: 500;
   color: ${({ theme }) => theme.title};
 `;

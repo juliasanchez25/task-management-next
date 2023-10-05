@@ -40,14 +40,15 @@ const TasksDroppable = ({
   ];
 
   const onDragEnd = (result: DropResult) => {
-    console.log(result);
     if (!result.destination) return;
 
     const changedTasks = tasks.map((task) => {
       if (task.id.toString() === result.draggableId) {
+        const status = result.destination?.droppableId as TaskModel['status'];
         return {
           ...task,
-          status: result.destination?.droppableId as TaskModel['status'],
+          status,
+          finishedAt: status === "done" ? new Date() : undefined,
         };
       }
       return task;
@@ -55,13 +56,13 @@ const TasksDroppable = ({
 
     const movedTask = changedTasks.find(
       (task) => task.id.toString() === result.draggableId,
-    );
+    ) ?? [];
     const tasksWithoutMovedTask = changedTasks.filter(
       (task) => task.id.toString() !== result.draggableId,
     );
     const tasksWithMovedTask = tasksWithoutMovedTask
       .slice(0, result.destination.index)
-      .concat(movedTask as TaskModel)
+      .concat(movedTask)
       .concat(tasksWithoutMovedTask.slice(result.destination.index));
 
     setTasks(tasksWithMovedTask);

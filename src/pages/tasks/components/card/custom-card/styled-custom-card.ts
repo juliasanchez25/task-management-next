@@ -5,7 +5,7 @@ import { Schedule, Delete, MoreHoriz, EditNote } from '@mui/icons-material';
 import { Card, CardActions, CardContent } from '@mui/material';
 
 export const Container = styled(Card)`
-  padding: ${pxToRem(15)};
+  padding: ${pxToRem(12)};
   display: flex;
   justify-content: center;
   flex-direction: column;

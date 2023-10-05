@@ -11,24 +11,26 @@ type Calendar = {
 
 const Calendar = ({ selectedDate, setSelectedDate }: Calendar) => {
   return (
-    <div>
+    <>
       <s.Title>Calendário</s.Title>
-      <LocalizationProvider
-        dateAdapter={AdapterDayjs}
-        localeText={{
-          calendarWeekNumberHeaderText: '#',
-          calendarWeekNumberText: (weekNumber) => `${weekNumber}.`,
-        }}
-      >
-        <DateCalendar
-          defaultValue={selectedDate ?? dayjs()}
-          displayWeekNumber
-          onChange={(value: any) => {
-            setSelectedDate(value);
+      <s.Container>
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          localeText={{
+            calendarWeekNumberHeaderText: '#',
+            calendarWeekNumberText: (weekNumber) => `${weekNumber}.`,
           }}
-        />
-      </LocalizationProvider>
-    </div>
+        >
+          <DateCalendar
+            defaultValue={selectedDate ?? dayjs()}
+            displayWeekNumber
+            onChange={(value: any) => {
+              setSelectedDate(value);
+            }}
+          />
+        </LocalizationProvider>
+      </s.Container>
+    </>
   );
 };
 

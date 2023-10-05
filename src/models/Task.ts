@@ -1,5 +1,5 @@
 type TaskStatus = 'todo' | 'doing' | 'done';
-type TaskType = 'work' | 'personal';
+export type TaskType = 'work' | 'personal';
 
 export interface TaskModel {
   id: number;
@@ -9,4 +9,5 @@ export interface TaskModel {
   status: TaskStatus;
   createdAt: Date;
   endAt: Date;
+  finishedAt?: Date;
 }

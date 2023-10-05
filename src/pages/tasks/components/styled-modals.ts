@@ -140,3 +140,10 @@ export const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
     color: `${theme.inputLabelFocus} !important`,
   },
 }));
+
+export const ErrorMessage = styled.p`
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: ${pxToRem(12)};
+  color: ${({ theme }) => theme.red};
+`;

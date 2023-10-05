@@ -11,7 +11,7 @@ export const TaskDatesContainer = styled.div`
 export const DateItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: ${pxToRem(12)};
+  font-size: ${pxToRem(10)};
   color: ${({ theme }) => theme.title};
   font-style: italic;
   gap: ${pxToRem(5)};

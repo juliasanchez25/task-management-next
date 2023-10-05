@@ -1,5 +1,5 @@
 import { Modal } from '@mui/material';
-import useKeypress from '../../../../hooks/useKeypress';
+import useKeypress from '@/hooks/useKeypress';
 import * as s from './styled-remove-task-modal';
 
 type RemoveTaskModalProps = {
