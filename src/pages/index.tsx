@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Home } from '@/pages/components/home/Home';
+import { Home } from '@/components/home/Home';
 
 const Index = () => {
 

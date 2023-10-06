@@ -5,7 +5,7 @@ import {
   DropResult,
   Droppable,
 } from 'react-beautiful-dnd';
-import CustomCard from '../../tasks/components/card/custom-card/CustomCard';
+import CustomCard from '@/components/tasks/card/custom-card/CustomCard';
 import * as s from './styled-tasks-droppable';
 
 type TasksDroppableProps = {

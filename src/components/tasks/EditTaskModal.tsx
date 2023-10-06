@@ -4,7 +4,7 @@ import { Close } from '@mui/icons-material';
 import { TaskModel, TaskTypeOption } from '@/models/Task';
 import { toast } from 'react-toastify';
 import TaskDates from './card/task-dates/TaskDates';
-import useKeypress from '../../../hooks/useKeypress';
+import useKeypress from '../../hooks/useKeypress';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
-import { Box, InputLabel, TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 export const BoxContainer = styled(Box)`
   position: absolute;
@@ -17,6 +17,16 @@ export const BoxContainer = styled(Box)`
   transform: translate(-50%, -50%);
 `;
 
+export const Top = styled.div`
+  display: flex;
+  margin-bottom: ${pxToRem(20)};
+`;
+
+export const Title = styled.h3`
+  margin-bottom: 0;
+  color: ${({ theme }) => theme.title};
+`;
+
 export const CloseButton = styled.button`
   position: absolute;
   padding-bottom: ${pxToRem(75)};
@@ -27,6 +37,38 @@ export const CloseButton = styled.button`
   color: ${({ theme }) => theme.gray};
   cursor: pointer;
 `;
+
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+  input: {
+    color: theme.label,
+  },
+  '& label.Mui-focused': {
+    color: `${theme.inputLabelFocus} !important`,
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: `${theme.input} !important`,
+  },
+  '& .MuiInputLabel-root': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: `${theme.input} !important`,
+    },
+    '&:hover fieldset': {
+      borderColor: `${theme.title} !important`,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: `${theme.inputLabelFocus} !important`,
+    },
+  },
+  '& .MuiOutlinedInput-input': {
+    color: `${theme.inputLabel} !important`,
+  },
+  '& .MuiOutlinedInput-multiline': {
+    color: `${theme.inputLabel} !important`,
+  },
+}));
 
 export const CreateButton = styled.button`
   margin: ${pxToRem(14)} 0;

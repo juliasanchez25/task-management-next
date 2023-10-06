@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import NewListModal from './new-list-modal/NewListModal';
-import { Add } from '@mui/icons-material';
-import * as s from './styled-lists-index';
-import TasksDroppable from '../components/tasks-droppable/TasksDroppable';
+import TasksDroppable from '@/components/tasks-droppable/TasksDroppable';
 import { TaskModel, TaskTypeOption } from '@/models/Task';
 import TasksService from '@/services/TasksService';
 import { MenuItem, Select } from '@mui/material';
+import * as s from '../../styles/styled-lists-index';
 
 const Lists = () => {
   const [newModal, setNewModal] = useState<boolean>(false);
@@ -54,7 +53,6 @@ const Lists = () => {
     TasksService.setTask(tasksToSave);
   }, [filteredTasks, allTasks, selectedTaskType]);
 
-
   const createList = () => {
     setNewModal(true);
   };
@@ -63,22 +61,22 @@ const Lists = () => {
     <s.Container>
       <s.Main>
         <s.MainTitle>Minhas listas</s.MainTitle>
-        <Select
+        <s.StyledSelect
           value={selectedTaskType}
           onChange={(e) => {
-            setSelectedTaskType(e.target.value);
+            setSelectedTaskType(e.target.value as string);
           }}>
           {tasksTypes.map(({ value, label }) => (
             <MenuItem key={value} value={value}>
               {label}
             </MenuItem>
           ))}
-        </Select>
-        <s.CreateListButton
+        </s.StyledSelect>
+        <s.CreateNewListButton
           onClick={createList}
         >
-          <Add />
-        </s.CreateListButton>
+          Criar nova lista
+        </s.CreateNewListButton>
       </s.Main>
       <TasksDroppable
         tasks={filteredTasks}

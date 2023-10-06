@@ -15,11 +15,6 @@ export const Main = styled.main`
   background-color: ${({ theme }) => theme.background};
   border-radius: 20px;
   width: 85%;
-
-  @media only screen and (max-width: 768px) {
-    flex-direction: column;
-    gap: 3rem;
-  }
 `;
 
 export const MainTitle = styled.h1`

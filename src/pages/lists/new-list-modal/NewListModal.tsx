@@ -1,10 +1,9 @@
 import React from 'react';
-import { Modal, TextField } from '@mui/material';
+import { Modal } from '@mui/material';
 import { toast } from 'react-toastify';
 import { Close } from '@mui/icons-material';
-import { ListModel } from '@/models/List';
 import useKeypress from '@/hooks/useKeypress';
-import * as s from './styled-new-list-modal';
+import * as s from '../../../styles/styled-new-list-modal';
 import { Controller, useForm } from 'react-hook-form';
 import { TaskTypeOption } from '@/models/Task';
 
@@ -54,9 +53,12 @@ const NewListModal = ({
     <Modal open={open}>
       <form onSubmit={handleSubmit(submit)}>
         <s.BoxContainer>
-          <s.CloseButton onClick={handleClose}>
-            <Close />
-          </s.CloseButton>
+          <s.Top>
+            <s.Title>Adicionar nova lista</s.Title>
+            <s.CloseButton onClick={handleClose}>
+              <Close />
+            </s.CloseButton>
+          </s.Top>
           <Controller
             name='title'
             control={control}
@@ -67,7 +69,7 @@ const NewListModal = ({
               },
             }}
             render={({ field: { value, onChange } }) => (
-              <TextField
+              <s.StyledTextField
                 label="Título da lista"
                 type="text"
                 variant="outlined"

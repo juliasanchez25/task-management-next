@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
-import TasksDroppable from '../components/tasks-droppable/TasksDroppable';
+import TasksDroppable from '@/components/tasks-droppable/TasksDroppable';
 import { TaskModel } from '@/models/Task';
-import { NewTaskModal } from './components/NewTaskModal';
-import { EditTaskModal } from './components/EditTaskModal';
-import RemoveTaskModal from './components/remove-task-modal/RemoveTaskModal';
+import { NewTaskModal } from '@/components/tasks/NewTaskModal';
+import { EditTaskModal } from '@/components/tasks/EditTaskModal';
+import RemoveTaskModal from '@/components/tasks/remove-task-modal/RemoveTaskModal';
 import taskService from '@/services/TasksService';
 import useDebounce from '@/hooks/useDebounce';
 import imageNotFound from '../../../public/assets/images/not-found.svg';
 import { toast } from 'react-toastify';
-import * as s from './styled-tasks-index';
+import * as s from '../../styles/styled-tasks-index';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<TaskModel[]>([]);
