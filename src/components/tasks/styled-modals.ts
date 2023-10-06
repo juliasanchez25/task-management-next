@@ -79,6 +79,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     borderBottomColor: `${theme.input} !important`,
   },
   '& .MuiInputLabel-root': {
+    padding: '0 0 0 5px',
     color: `${theme.inputLabel} !important`,
   },
   '& .MuiOutlinedInput-root': {
@@ -106,7 +107,6 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
     borderColor: `${theme.input} !important`,
   },
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    padding: '0 0 0 5px',
     borderWidth: '2px !important',
     borderColor: `${theme.inputLabelFocus} !important`,
   },
@@ -137,7 +137,11 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
 export const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
   color: `${theme.inputLabel} !important`,
 
+  '&.MuiFormLabel-root': {
+    padding: '0 0 0 7px',
+  },
   '&.Mui-focused': {
+    padding: '0 0 0 8px',
     color: `${theme.inputLabelFocus} !important`,
   },
 }));
