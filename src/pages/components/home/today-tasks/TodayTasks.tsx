@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import TasksService from '@/services/TasksService';
 import * as s from './styled-today-tasks';
@@ -22,7 +23,7 @@ const TodayTasks = ({
       dayjs(task.endAt).isSame(selectedDate, 'day')
     ));
     setSelectedDayTasks(latestTasks);
-  }, [selectedDate, allTasks, setSelectedDayTasks]);
+  }, [selectedDate]);
 
   return (
     <div>
