@@ -10,20 +10,6 @@ export const DroppableTasksContainer = styled.div`
   flex-direction: column;
   flex: 1;
   width: 100%;
-  height: 100vh;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 5px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
-  }
 `;
 
 export const DraggableCard = styled.div`

@@ -24,10 +24,10 @@ const RemoveTaskModal = ({
       <Modal open={open}>
         <s.BoxContainer>
           <s.Title>Você tem certeza que deseja excluir?</s.Title>
-          <s.ConfirmButton onClick={onClickConfirm}>Excluir</s.ConfirmButton>
-          <s.CancelButton onClick={() => setOpen(false)}>
-            Cancelar
-          </s.CancelButton>
+          <s.ButtonsContainer>
+            <s.CancelButton onClick={() => setOpen(false)}>Cancelar</s.CancelButton>
+            <s.ConfirmButton onClick={onClickConfirm}>Excluir</s.ConfirmButton>
+          </s.ButtonsContainer>
         </s.BoxContainer>
       </Modal>
     </>

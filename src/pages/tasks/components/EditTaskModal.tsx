@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { TaskModel } from '@/models/Task';
+import { TaskModel, TaskTypeOption } from '@/models/Task';
 import { toast } from 'react-toastify';
+import TaskDates from './card/task-dates/TaskDates';
 import useKeypress from '../../../hooks/useKeypress';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
@@ -35,10 +36,16 @@ export const EditTaskModal = ({
   const [endAt, setEndAt] = useState<Date>(
     task.endAt || dayjs().add(1, 'day').toDate(),
   );
-  const tasksTypes = [
-    { value: 'work', label: 'Trabalho' },
-    { value: 'personal', label: 'Pessoal' },
-  ];
+  const [tasksTypes, setTasksTypes]  = useState<TaskTypeOption[]>([]);
+
+  useEffect(() => {
+    const createdLists = JSON.parse(localStorage.getItem('lists') || '[]') as TaskTypeOption[];
+    setTasksTypes([
+      { value: 'Trabalho', label: 'Trabalho' },
+      { value: 'Pessoal', label: 'Pessoal' },
+      ...createdLists
+    ]);
+  }, []);
 
   const resetFields = () => {
     setTitle('');
@@ -93,7 +100,7 @@ export const EditTaskModal = ({
             onChange={(e) => setTitle(e.target.value)}
           />
           <s.StyledTextField
-            placeholder="Descrição da tarefa"
+            placeholder="Notas"
             value={description}
             type="text"
             variant="outlined"
@@ -126,6 +133,7 @@ export const EditTaskModal = ({
             value={dayjs(endAt).format('YYYY-MM-DD')}
             onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
           />
+          <TaskDates task={task} />
           <s.CreateButton onClick={handleEdit}>Editar tarefa</s.CreateButton>
         </s.BoxContainer>
       </Modal>

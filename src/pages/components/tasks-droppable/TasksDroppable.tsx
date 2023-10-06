@@ -5,7 +5,7 @@ import {
   DropResult,
   Droppable,
 } from 'react-beautiful-dnd';
-import CustomCard from '../card/custom-card/CustomCard';
+import CustomCard from '../../tasks/components/card/custom-card/CustomCard';
 import * as s from './styled-tasks-droppable';
 
 type TasksDroppableProps = {
@@ -14,7 +14,7 @@ type TasksDroppableProps = {
   openEditModal: (id: number) => void;
   remove: (
     id: number,
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
   ) => void;
 };
 
@@ -48,7 +48,7 @@ const TasksDroppable = ({
         return {
           ...task,
           status,
-          finishedAt: status === "done" ? new Date() : undefined,
+          finishedAt: status === 'done' ? new Date() : undefined,
         };
       }
       return task;
@@ -96,6 +96,7 @@ const TasksDroppable = ({
                                 index={index}
                                 task={task}
                                 remove={(id, event) => remove(id, event)}
+                                openEditModal={openEditModal}
                               />
                             </s.DraggableCard>
                           )}

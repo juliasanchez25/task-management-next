@@ -20,23 +20,25 @@ const TodayTasks = ({
   useEffect(() => {
     const latestTasks = allTasks.filter((task) => (
       dayjs(task.endAt).isSame(selectedDate, 'day')
-    ))
+    ));
     setSelectedDayTasks(latestTasks);
-  }, [selectedDate])
+  }, [selectedDate, allTasks, setSelectedDayTasks]);
 
   return (
     <div>
-      <s.Title>Tarefas para entregar hoje</s.Title>
       <s.Container>
-      {Boolean(selectedDayTasks.length) ? (
+        <s.Title>Tarefas para entregar hoje</s.Title>
+        {Boolean(selectedDayTasks.length) ? (
           selectedDayTasks.map((task) => (
-          <s.Card key={task.id}>
-            <s.TaskTitle>{task.title}</s.TaskTitle>
-          </s.Card>
-        ))
+            <>
+              <s.Card key={task.id}>
+                <s.TaskTitle>{task.title}</s.TaskTitle>
+              </s.Card>
+            </>
+          ))
         ) : (
-          <div>Nenhuma tarefa para entregar hoje!!</div>
-          )}
+          <div>Aqui aparecerão suas tarefas do dia.</div>
+        )}
       </s.Container>
     </div>
   );

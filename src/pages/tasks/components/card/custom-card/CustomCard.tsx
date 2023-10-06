@@ -1,11 +1,13 @@
 import { TaskModel } from '@/models/Task';
-import { IconButton, Tooltip } from '@mui/material';
-import Tag from '../task-type-tag/TaskTypeTag';
+import Tag from '../tags/task-type-tag/TaskTypeTag';
 import TaskDates from '../task-dates/TaskDates';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import * as s from './styled-custom-card';
+import CardActions from '../card-actions/CardActions';
+import TaskCurrentStatusTag from '../tags/task-current-status-tag/TaskCurrentStatusTag';
+import TaskEndsAt from '../task-dates/task-ends-at/TaskEndsAt';
 
 type CardProps = {
   task: TaskModel;
@@ -13,71 +15,25 @@ type CardProps = {
   onClick?: () => void;
   remove: (
     id: number,
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
   ) => void;
+  openEditModal: (id: number) => void;
 };
 
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
-const CustomCard = ({ task, onClick, remove }: CardProps) => {
-  const endOfDay = dayjs().endOf('day');
-  const taskEndTime = dayjs(task.endAt).endOf('day');
-
-  const status = {
-    late: taskEndTime.isBefore(endOfDay),
-    today: taskEndTime.isSame(endOfDay, 'day'),
-    inTime: taskEndTime.isAfter(endOfDay),
-  };
-
-  const handleTaskEndAt = () => {
-    if (status.late) {
-      return 'Atrasado';
-    }
-    if (status.today) {
-      return 'Hoje';
-    }
-    if (status.inTime) {
-      return 'Em dia';
-    }
-  };
-
+const CustomCard = ({ task, onClick, remove, openEditModal }: CardProps) => {
   return (
-    <s.Container onClick={onClick}>
-      <s.Content>
-        <s.CardTop>
-          <Tag type={task.type} />
-          <s.TaskDue
-            status={status.late ? 'late' : status.today ? 'today' : 'inTime'}
-          >
-            <s.ScheduleIcon />
-            <p>{handleTaskEndAt()}</p>
-          </s.TaskDue>
-          <s.MoreHorizIcon />
-        </s.CardTop>
+    <s.Container>
+      <s.CardTop>
+        <Tag type={task.type} />
+        <TaskCurrentStatusTag task={task} />
+        <CardActions task={task} remove={remove} openEditModal={openEditModal} />
+      </s.CardTop>
+      <s.Content onClick={onClick}>
         <s.CardTitle>{task.title}</s.CardTitle>
-        <s.DatesActions>
-          <s.Dates>
-            <TaskDates task={task} />
-          </s.Dates>
-          <s.Actions>
-            <Tooltip title="Editar tarefa">
-              <IconButton onClick={onClick} size="small">
-                <s.EditNoteIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Excluir tarefa">
-              <IconButton
-                onClick={(event) => {
-                  remove(task.id, event);
-                }}
-                size="small"
-              >
-                <s.DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </s.Actions>
-        </s.DatesActions>
+        <TaskEndsAt task={task} />
       </s.Content>
     </s.Container>
   );

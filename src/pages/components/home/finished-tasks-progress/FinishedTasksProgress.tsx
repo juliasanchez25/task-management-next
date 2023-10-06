@@ -16,13 +16,13 @@ const FinishedTasksProgress = () => {
     const totalTasksEndingToday = tasks.length;
     const totalTasksFinishedToday = finishedTasks.length;
     return ((totalTasksFinishedToday / totalTasksEndingToday) * 100).toFixed(0);
-  }
+  };
 
   return (
     <>
       {tasks.length > 0 ? (
         <s.TasksFinishedToday>
-          <h2 className='title'>Seu progresso hoje</h2>
+          <h2 className='title'>Progresso do dia:</h2>
           <s.ProgressContainer>
             <s.ProgressBar width={parseInt(handleProgress())} animate />
           </s.ProgressContainer>

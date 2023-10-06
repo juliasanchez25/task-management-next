@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
 import { Search } from '@mui/icons-material';
 
+export const Container = styled.div`
+  margin-left: 4%;
+  width: 100vw;
+`;
+
 export const Main = styled.main`
-  padding: ${pxToRem(20)} ${pxToRem(30)};
-  margin: ${pxToRem(50)} 0 ${pxToRem(20)};
+  margin: ${pxToRem(15)} 0 ${pxToRem(20)};
   display: flex;
   justify-content: space-between;
   align-items: center;

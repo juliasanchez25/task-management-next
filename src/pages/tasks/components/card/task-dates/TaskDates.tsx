@@ -1,24 +1,19 @@
 import React from 'react';
-import { TaskModel } from '@/models/Task';
-import dayjs from 'dayjs';
 import * as s from './styled-task-dates';
+import TaskCreatedAt from './task-created-at/TaskCreatedAt';
+import TaskEndsAt from './task-ends-at/TaskEndsAt';
+import { TaskModel } from '@/models/Task';
 
-type TaskTypeTagProps = {
+type TaskDatesProps = {
   task: TaskModel;
-};
+}
 
-const TaskDates = ({ task }: TaskTypeTagProps) => {
+
+const TaskDates = ({ task }: TaskDatesProps) => {
   return (
     <s.TaskDatesContainer>
-      <s.DateItem>
-        <s.CalendarIcon />
-        <p>Criada em: {dayjs(task.createdAt).format('DD/MM/YYYY')}</p>
-      </s.DateItem>
-      <s.DateItem>
-        <s.ScheduleIcon />
-        <p>Vence em:</p>
-        <p>{dayjs(task.endAt).format('DD/MM/YYYY')}</p>
-      </s.DateItem>
+      <TaskCreatedAt task={task} />
+      <TaskEndsAt task={task} />
     </s.TaskDatesContainer>
   );
 };

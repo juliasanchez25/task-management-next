@@ -30,16 +30,14 @@ export default function App({ Component, pageProps }: any) {
       <GlobalStyles />
       <>
         <ToastContainer />
-        <div className="page-content">
-          {isMounted && (
-            <>
-              <Sidebar theme={theme} toggleTheme={toggleTheme} />
-              <div>
-                <Component {...pageProps} />
-              </div>
-            </>
-          )}
-        </div>
+        {isMounted && (
+          <div style={{
+            display: 'flex',
+          }}>
+            <Sidebar theme={theme} toggleTheme={toggleTheme} />
+            <Component {...pageProps} />
+          </div>
+        )}
       </>
     </ThemeProvider>
   );

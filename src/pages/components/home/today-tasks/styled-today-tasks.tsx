@@ -17,7 +17,7 @@ export const Card = styled.div`
   padding-left: 0.75rem;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.lightBlue};
+  background-color: ${({ theme }) => theme.lightPurple};
   border-radius: 10px;
 `;
 

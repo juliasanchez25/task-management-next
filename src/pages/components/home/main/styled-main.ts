@@ -3,14 +3,7 @@ import Link from 'next/link';
 import { pxToRem } from '@/utils/px-to-rem';
 
 export const Main = styled.main`
-  padding: ${pxToRem(10)} ${pxToRem(20)};
-  margin-top: ${pxToRem(40)};
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 20px;
-  width: ${pxToRem(980)};
-  background-color: ${({ theme }) => theme.background};
 
   @media only screen and (max-width: 768px) {
     width: 100%;
@@ -22,8 +15,24 @@ export const Main = styled.main`
 `;
 
 export const Name = styled.p`
-  margin-bottom: 0;
-  font-size: ${pxToRem(16)};
+  margin-bottom: ${pxToRem(8)};
+  font-size: ${pxToRem(18)};
+  font-weight: 300;
+  color: ${({ theme }) => theme.description};
+`;
+
+export const Title = styled.h1`
+  margin: 0;
+  font-size: ${pxToRem(36)};
+  font-weight: 700;
+  color: ${({ theme }) => theme.title};
+`;
+
+export const Description = styled.p`
+  margin-top: ${pxToRem(18)};
+  max-width: ${pxToRem(580)};
+  font-size: ${pxToRem(18)};
+  font-weight: 300;
   color: ${({ theme }) => theme.description};
 `;
 
@@ -37,19 +46,3 @@ export const ViewTasksLink = styled(Link)`
     color: ${({ theme }) => theme.title};
   }
 `;
-
-export const Title = styled.h1`
-  margin: 0;
-  font-size: ${pxToRem(36)};
-  font-weight: 600;
-  color: ${({ theme }) => theme.title};
-`;
-
-export const Description = styled.p`
-  margin-top: ${pxToRem(8)};
-  max-width: ${pxToRem(580)};
-  font-size: ${pxToRem(16)};
-  font-weight: 400;
-  color: ${({ theme }) => theme.description};
-`;
-

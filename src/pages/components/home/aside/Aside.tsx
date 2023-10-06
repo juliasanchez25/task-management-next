@@ -11,7 +11,7 @@ const Aside = () => {
 
   useEffect(() => {
 
-  }, [selectedDate])
+  }, [selectedDate]);
 
   return (
     <s.Aside>
@@ -26,6 +26,6 @@ const Aside = () => {
       />
     </s.Aside>
   );
-}
+};
 
 export default Aside;

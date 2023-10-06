@@ -5,7 +5,6 @@ import * as s from './styled-main';
 const Main = () => {
   return (
     <s.Main>
-      <Image src={timeManagement} alt="Time Management" />
       <div>
         <s.Name>Olá, Julia!</s.Name>
         <s.Title>Bem-vindo ao Task Manager!</s.Title>
@@ -19,6 +18,6 @@ const Main = () => {
       </div>
     </s.Main>
   );
-}
+};
 
 export default Main;

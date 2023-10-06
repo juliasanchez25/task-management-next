@@ -1,7 +1,7 @@
 import FinishedTasksProgress from '@/pages/components/home/finished-tasks-progress/FinishedTasksProgress';
 import Aside from './aside/Aside';
 import Main from './main/Main';
-import * as s from './styled-home'
+import * as s from './styled-home';
 
 export const Home = () => {
   return (
@@ -12,5 +12,5 @@ export const Home = () => {
       </div>
       <Aside />
     </s.Container>
-  )
-}
+  );
+};
