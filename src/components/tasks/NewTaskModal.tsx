@@ -123,7 +123,7 @@ export const NewTaskModal = ({
             />
             <FormControl>
               <s.StyledInputLabel id="demo-simple-select-label">
-                  Categoria
+                  Lista
               </s.StyledInputLabel>
               <Controller
                 name="category"
@@ -137,7 +137,7 @@ export const NewTaskModal = ({
                 render={({ field: { value, onChange } }) => (
                   <s.StyledSelect
                     value={value}
-                    label="Categoria"
+                    label="Lista"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     variant="outlined"

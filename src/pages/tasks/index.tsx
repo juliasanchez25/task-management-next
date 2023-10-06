@@ -5,7 +5,7 @@ import TasksDroppable from '@/components/tasks-droppable/TasksDroppable';
 import { TaskModel } from '@/models/Task';
 import { NewTaskModal } from '@/components/tasks/NewTaskModal';
 import { EditTaskModal } from '@/components/tasks/EditTaskModal';
-import RemoveTaskModal from '@/components/tasks/remove-task-modal/RemoveTaskModal';
+import RemoveModal from '@/components/remove-modal/RemoveModal';
 import taskService from '@/services/TasksService';
 import useDebounce from '@/hooks/useDebounce';
 import imageNotFound from '../../../public/assets/images/not-found.svg';
@@ -96,7 +96,7 @@ const Tasks = () => {
           />
         )}
         {removeModal && (
-          <RemoveTaskModal
+          <RemoveModal
             open={removeModal}
             setOpen={setRemoveModal}
             onClickConfirm={handleRemove}

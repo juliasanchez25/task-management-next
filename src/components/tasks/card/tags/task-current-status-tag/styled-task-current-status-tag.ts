@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import styled from 'styled-components';
 import { pxToRem } from '@/utils/px-to-rem';
 import { Schedule } from '@mui/icons-material';
@@ -6,32 +7,32 @@ export const Container = styled.div<{ status: 'late' | 'today' | 'inTime' }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${pxToRem(80)};
+  width: ${pxToRem(83)};
   height: ${pxToRem(30)};
   border-radius: 18px;
-  gap: ${pxToRem(5)};
+  gap: ${pxToRem(3)};
   background-color: ${(props) => {
     switch (props.status) {
-    case 'late':
-      return props.theme.lightRed;
-    case 'today':
-      return props.theme.yellow;
-    case 'inTime':
-      return props.theme.lightGreen;
-    default:
-      return 'transparent';
+      case 'late':
+        return '#ff875b';
+      case 'today':
+        return '#ffd442';
+      case 'inTime':
+        return '#96e17e';
+      default:
+        return 'transparent';
     }
   }};
   color: ${(props) => {
     switch (props.status) {
-    case 'late':
-      return props.theme.red;
-    case 'today':
-      return props.theme.orange;
-    case 'inTime':
-      return props.theme.green;
-    default:
-      return 'inherit';
+      case 'late':
+        return '#da0000';
+      case 'today':
+        return '#ff8a00';
+      case 'inTime':
+        return '#00952a';
+      default:
+        return 'inherit';
     }
   }};
 

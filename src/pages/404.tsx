@@ -8,6 +8,7 @@ export default function NotFound() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '100vw',
         height: '100vh',
         pointerEvents: 'none',
       }}

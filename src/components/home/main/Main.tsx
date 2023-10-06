@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import timeManagement from '../../../../../public/assets/images/time-management.png';
 import * as s from './styled-main';
 
 const Main = () => {

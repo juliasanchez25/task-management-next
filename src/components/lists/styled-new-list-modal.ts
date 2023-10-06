@@ -43,6 +43,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     color: theme.label,
   },
   '& label.Mui-focused': {
+    padding: '0 0 0 5px',
     color: `${theme.inputLabelFocus} !important`,
   },
   '& .MuiInput-underline:after': {
@@ -75,7 +76,7 @@ export const CreateButton = styled.button`
   height: ${pxToRem(47)};
   font-size: ${pxToRem(16)};
   font-weight: 600;
-  color: #ffff;
+  color: #fff;
   background-color: ${({ theme }) => theme.blue};
   border: none;
   border-radius: 8px;
@@ -89,6 +90,5 @@ export const CreateButton = styled.button`
 
   &:active {
     transform: translateY(0);
-    box-shadow: rgba(47, 128, 237, 0.8) 0px 0px 0px;
   }
 `;

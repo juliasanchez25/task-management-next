@@ -18,10 +18,7 @@ export const CardTag = styled.div<CardTagProps>`
   height: ${pxToRem(28)};
   font-size: ${pxToRem(12)};
   font-weight: 600;
-  color: ${({ theme }) => theme.blue};
+  color: #fff;
   border-radius: 50px;
-  background-color: ${({ type, theme }) =>
-    type === 'personal' ? theme.lightBlue : theme.lightPurple};
-  color: ${({ type, theme }) =>
-    type === 'personal' ? theme.blue : theme.purple};
+  background-color: ${({ theme }) => theme.blue};
 `;

@@ -1,21 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import TasksService from '@/services/TasksService';
-import * as s from './styled-today-tasks';
+import { TaskSharp } from '@mui/icons-material';
+import * as s from './styled-tasks-to-deliver';
 import { TaskModel } from '@/models/Task';
 import dayjs, { Dayjs } from 'dayjs';
 
-type TodayTasksProps = {
+type TasksToDeliverProps = {
   selectedDayTasks: TaskModel[];
   setSelectedDayTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   selectedDate: Dayjs;
 }
 
-const TodayTasks = ({
+const TasksToDeliver = ({
   selectedDayTasks,
   selectedDate,
   setSelectedDayTasks
-}: TodayTasksProps) => {
+}: TasksToDeliverProps) => {
   const allTasks = TasksService.getTask();
 
   useEffect(() => {
@@ -28,21 +29,27 @@ const TodayTasks = ({
   return (
     <div>
       <s.Container>
-        <s.Title>Tarefas para entregar hoje</s.Title>
+        <s.Title>
+          <TaskSharp fontSize={'small'} />
+          Tarefas para entregar
+        </s.Title>
         {Boolean(selectedDayTasks.length) ? (
           selectedDayTasks.map((task) => (
             <>
-              <s.Card key={task.id}>
-                <s.TaskTitle>{task.title}</s.TaskTitle>
-              </s.Card>
+              <s.StyledLink href='/tasks'>
+                <s.Card key={task.id}>
+                  <s.TaskIcon />
+                  <s.TaskTitle>{task.title}</s.TaskTitle>
+                </s.Card>
+              </s.StyledLink>
             </>
           ))
         ) : (
-          <div>Aqui aparecerão suas tarefas do dia.</div>
+          <p>Aqui aparecerão suas tarefas do dia.</p>
         )}
       </s.Container>
     </div>
   );
 };
 
-export default TodayTasks;
+export default TasksToDeliver;

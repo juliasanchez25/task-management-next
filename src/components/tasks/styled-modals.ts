@@ -64,7 +64,6 @@ export const CreateButton = styled.button`
 
   &:active {
     transform: translateY(0);
-    box-shadow: rgba(47, 128, 237, 0.8) 0px 0px 0px;
   }
 `;
 
@@ -73,6 +72,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     color: theme.label,
   },
   '& label.Mui-focused': {
+    padding: '0 0 0 5px',
     color: `${theme.inputLabelFocus} !important`,
   },
   '& .MuiInput-underline:after': {
@@ -106,6 +106,7 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
     borderColor: `${theme.input} !important`,
   },
   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    padding: '0 0 0 5px',
     borderWidth: '2px !important',
     borderColor: `${theme.inputLabelFocus} !important`,
   },

@@ -3,7 +3,7 @@ import { Modal } from '@mui/material';
 import { toast } from 'react-toastify';
 import { Close } from '@mui/icons-material';
 import useKeypress from '@/hooks/useKeypress';
-import * as s from '../../../styles/styled-new-list-modal';
+import * as s from './styled-new-list-modal';
 import { Controller, useForm } from 'react-hook-form';
 import { TaskTypeOption } from '@/models/Task';
 

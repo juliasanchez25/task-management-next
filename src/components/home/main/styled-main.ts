@@ -39,7 +39,7 @@ export const Description = styled.p`
 export const ViewTasksLink = styled(Link)`
   padding: 0 ${pxToRem(5)};
   text-decoration: solid underline;
-  color: ${({ theme }) => theme.purple};
+  color: ${({ theme }) => theme.blue};
   transition: color 0.2s;
 
   &:hover {

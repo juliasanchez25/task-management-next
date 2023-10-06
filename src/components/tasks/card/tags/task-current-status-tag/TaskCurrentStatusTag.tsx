@@ -3,6 +3,7 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import * as s from './styled-task-current-status-tag';
 import { TaskModel } from '@/models/Task';
+import { Schedule } from '@mui/icons-material';
 
 type TaskCurrentStatusTagProps = {
   task: TaskModel;
@@ -38,7 +39,7 @@ const TaskCurrentStatusTag = ({ task }: TaskCurrentStatusTagProps) => {
       <s.Container
         status={status.late ? 'late' : status.today ? 'today' : 'inTime'}
       >
-        <s.ScheduleIcon />
+        <Schedule fontSize={'small'} />
         <p>{handleTaskEndAt()}</p>
       </s.Container>
     </>

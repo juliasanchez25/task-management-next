@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import NewListModal from './new-list-modal/NewListModal';
+import NewListModal from '@/components/lists/NewListModal';
 import TasksDroppable from '@/components/tasks-droppable/TasksDroppable';
 import { TaskModel, TaskTypeOption } from '@/models/Task';
+import { ListModel } from '@/models/List';
 import TasksService from '@/services/TasksService';
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem } from '@mui/material';
 import * as s from '../../styles/styled-lists-index';
+import { Delete } from '@mui/icons-material';
+import RemoveModal from '@/components/remove-modal/RemoveModal';
 
 const Lists = () => {
+  const [lists, setLists] = useState<TaskModel[]>([]);
   const [newModal, setNewModal] = useState<boolean>(false);
   const [allTasks, setAllTasks] = useState<TaskModel[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<TaskModel[]>([]);
   const [tasksTypes, setTasksTypes]  = useState<TaskTypeOption[]>([]);
   const [selectedTaskType, setSelectedTaskType] = useState<string | null>('Trabalho');
+
+  const [listToRemove, setListToRemove] = useState<ListModel>();
+  const [removeModal, setRemoveModal] = useState<boolean>(false);
 
   const openEditModal = (id: number) => {
     console.log(id);
@@ -24,6 +31,19 @@ const Lists = () => {
     event.stopPropagation();
     const newTasks = allTasks.filter((task) => task.id !== id);
     setAllTasks(newTasks);
+  };
+
+  const removeList = (id: number, event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    event.stopPropagation();
+    setListToRemove(lists.find((list) => list.id === id));
+    setRemoveModal(true);
+  };
+
+  const handleRemove = () => {
+    if (listToRemove) {
+      setLists((lists) => lists.filter((list) => list.id !== listToRemove.id));
+      setRemoveModal(false);
+    }
   };
 
   useEffect(() => {
@@ -72,11 +92,18 @@ const Lists = () => {
             </MenuItem>
           ))}
         </s.StyledSelect>
-        <s.CreateNewListButton
-          onClick={createList}
-        >
-          Criar nova lista
-        </s.CreateNewListButton>
+        <s.ButtonsContainer>
+          <s.CreateNewListButton
+            onClick={createList}
+          >
+            Criar nova lista
+          </s.CreateNewListButton>
+          <s.DeleteListButton
+          >
+            <Delete />
+            Apagar lista
+          </s.DeleteListButton>
+        </s.ButtonsContainer>
       </s.Main>
       <TasksDroppable
         tasks={filteredTasks}
@@ -85,6 +112,13 @@ const Lists = () => {
         remove={remove}
       />
       <NewListModal open={newModal} setOpen={setNewModal} />
+      {removeModal && (
+        <RemoveModal
+          open={removeModal}
+          setOpen={setRemoveModal}
+          onClickConfirm={handleRemove}
+        />
+      )}
     </s.Container>
   );
 };

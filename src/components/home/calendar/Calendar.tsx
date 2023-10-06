@@ -1,6 +1,5 @@
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import { CalendarMonth } from '@mui/icons-material';
 import * as s from './styled-calendar';
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -12,23 +11,26 @@ type Calendar = {
 const Calendar = ({ selectedDate, setSelectedDate }: Calendar) => {
   return (
     <>
-      <s.Title>Calendário</s.Title>
+      <s.Title>
+        <CalendarMonth fontSize={'small'} />
+        Calendário
+      </s.Title>
       <s.Container>
-        <LocalizationProvider
+        <s.StyledLocalizationProvider
           dateAdapter={AdapterDayjs}
           localeText={{
             calendarWeekNumberHeaderText: '#',
             calendarWeekNumberText: (weekNumber) => `${weekNumber}.`,
           }}
         >
-          <DateCalendar
+          <s.StyledDateCalendar
             defaultValue={selectedDate ?? dayjs()}
             displayWeekNumber
             onChange={(value: any) => {
               setSelectedDate(value);
             }}
           />
-        </LocalizationProvider>
+        </s.StyledLocalizationProvider>
       </s.Container>
     </>
   );

@@ -53,8 +53,8 @@ export const CreateTaskButton = styled.button`
   border: none;
   outline: none;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.purple};
-  color: ${({ theme }) => theme.offWhite};
+  background-color: ${({ theme }) => theme.blue};
+  color: #fff;
   font-size: ${pxToRem(16)};
   font-weight: 400;
   cursor: pointer;
@@ -62,12 +62,11 @@ export const CreateTaskButton = styled.button`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: rgba(152, 84, 203, 0.8) 0px 5px 15px;
+    box-shadow: rgba(47, 128, 237, 0.8) 0px 5px 15px;
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: rgba(152, 84, 203, 0.8) 0px 0px 0px;
   }
 `;
 

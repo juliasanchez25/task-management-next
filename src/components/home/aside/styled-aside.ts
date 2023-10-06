@@ -6,5 +6,4 @@ export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.background};
-  border-radius: 14px;
 `;

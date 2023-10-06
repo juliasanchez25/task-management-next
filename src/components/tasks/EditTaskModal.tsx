@@ -109,11 +109,11 @@ export const EditTaskModal = ({
           />
           <FormControl>
             <s.StyledInputLabel id="demo-simple-select-label">
-              Categoria
+              Lista
             </s.StyledInputLabel>
             <s.StyledSelect
               required
-              label="Categoria"
+              label="Lista"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               variant="outlined"

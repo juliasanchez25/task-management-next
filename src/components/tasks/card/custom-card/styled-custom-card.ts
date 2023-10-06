@@ -15,7 +15,7 @@ export const Container = styled(Card)`
 `;
 
 export const CardTop = styled.div`
-  padding: 8px 15px;
+  padding: 8px 15px 0;
   display: flex;
   justify-content: space-between;
 `;

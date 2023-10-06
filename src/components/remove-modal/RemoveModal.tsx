@@ -1,18 +1,18 @@
 import { Modal } from '@mui/material';
 import useKeypress from '@/hooks/useKeypress';
-import * as s from './styled-remove-task-modal';
+import * as s from './styled-remove-modal';
 
-type RemoveTaskModalProps = {
+type RemoveModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onClickConfirm: () => void;
 };
 
-const RemoveTaskModal = ({
+const RemoveModal = ({
   open,
   onClickConfirm,
   setOpen,
-}: RemoveTaskModalProps) => {
+}: RemoveModalProps) => {
   useKeypress('Escape', () => {
     if (open) {
       setOpen(false);
@@ -34,4 +34,4 @@ const RemoveTaskModal = ({
   );
 };
 
-export default RemoveTaskModal;
+export default RemoveModal;
