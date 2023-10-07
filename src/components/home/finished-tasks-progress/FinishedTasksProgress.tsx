@@ -5,11 +5,11 @@ import * as s from './styled-finished-tasks-progress';
 import dayjs from 'dayjs';
 
 const FinishedTasksProgress = () => {
-  const [tasks] = useState<TaskModel[]>(TasksService.getTask().filter((task) => (
+  const [tasks] = useState<TaskModel[]>(TasksService.getTasks().filter((task) => (
     dayjs(task.endAt).isSame(dayjs(), 'day')
   )));
-  const [finishedTasks] = useState<TaskModel[]>(TasksService.getTask().filter((task) => (
-    task.status === 'done' && dayjs(task.finishedAt).isSame(dayjs(), 'day')
+  const [finishedTasks] = useState<TaskModel[]>(TasksService.getTasks().filter((task) => (
+    task.status === 'done' && dayjs(task.endAt).isSame(dayjs(), 'day')
   )));
 
   const handleProgress = () => {

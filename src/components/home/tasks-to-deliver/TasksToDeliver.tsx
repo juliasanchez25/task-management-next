@@ -17,7 +17,7 @@ const TasksToDeliver = ({
   selectedDate,
   setSelectedDayTasks
 }: TasksToDeliverProps) => {
-  const allTasks = TasksService.getTask();
+  const allTasks = TasksService.getTasks();
 
   useEffect(() => {
     const latestTasks = allTasks.filter((task) => (
@@ -34,15 +34,15 @@ const TasksToDeliver = ({
           Tarefas para entregar
         </s.Title>
         {Boolean(selectedDayTasks.length) ? (
-          selectedDayTasks.map((task) => (
-            <>
+          selectedDayTasks.map((task, index) => (
+            <div key={index}>
               <s.StyledLink href='/tasks'>
                 <s.Card key={task.id}>
                   <s.TaskIcon />
                   <s.TaskTitle>{task.title}</s.TaskTitle>
                 </s.Card>
               </s.StyledLink>
-            </>
+            </div>
           ))
         ) : (
           <p>Aqui aparecerão suas tarefas do dia.</p>

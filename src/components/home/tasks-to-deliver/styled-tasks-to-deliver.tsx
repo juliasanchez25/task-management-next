@@ -26,6 +26,7 @@ export const Container = styled.div`
 
 export const Card = styled.div`
   padding-left: 0.75rem;
+  padding-right: 0.75rem;
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.lightBlue};
@@ -42,6 +43,8 @@ export const TaskTitle = styled.h4`
   font-size: ${pxToRem(14)};
   font-weight: 500;
   color: #fff;
+  max-width: ${pxToRem(350)};
+  overflow-wrap: break-word;
 `;
 
 export const TaskIcon = styled(TaskAlt)`

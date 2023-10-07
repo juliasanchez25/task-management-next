@@ -43,13 +43,13 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     color: theme.label,
   },
   '& label.Mui-focused': {
-    padding: '0 0 0 5px',
     color: `${theme.inputLabelFocus} !important`,
   },
   '& .MuiInput-underline:after': {
     borderBottomColor: `${theme.input} !important`,
   },
   '& .MuiInputLabel-root': {
+    padding: '0 0 0 5px',
     color: `${theme.inputLabel} !important`,
   },
   '& .MuiOutlinedInput-root': {

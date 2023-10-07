@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle<{ theme: any }>`
-
   * {
     font-family: 'Inter', sans-serif;
   }

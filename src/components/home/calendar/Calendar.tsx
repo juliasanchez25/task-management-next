@@ -25,6 +25,7 @@ const Calendar = ({ selectedDate, setSelectedDate }: Calendar) => {
         >
           <s.StyledDateCalendar
             defaultValue={selectedDate ?? dayjs()}
+            value={selectedDate}
             displayWeekNumber
             onChange={(value: any) => {
               setSelectedDate(value);

@@ -1,13 +1,12 @@
 import React from 'react';
-import * as s from './styled-task-dates';
 import TaskCreatedAt from './task-created-at/TaskCreatedAt';
 import TaskEndsAt from './task-ends-at/TaskEndsAt';
 import { TaskModel } from '@/models/Task';
+import * as s from './styled-task-dates';
 
 type TaskDatesProps = {
   task: TaskModel;
 }
-
 
 const TaskDates = ({ task }: TaskDatesProps) => {
   return (

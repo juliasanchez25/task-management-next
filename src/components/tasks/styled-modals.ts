@@ -138,10 +138,9 @@ export const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
   color: `${theme.inputLabel} !important`,
 
   '&.MuiFormLabel-root': {
-    padding: '0 0 0 7px',
+    padding: '0 0 0 0',
   },
   '&.Mui-focused': {
-    padding: '0 0 0 8px',
     color: `${theme.inputLabelFocus} !important`,
   },
 }));

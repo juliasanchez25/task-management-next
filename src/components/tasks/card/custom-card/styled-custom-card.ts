@@ -12,6 +12,7 @@ export const Container = styled(Card)`
   background-color: ${({ theme }) => theme.background} !important;
   color: ${({ theme }) => theme.title};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
 `;
 
 export const CardTop = styled.div`

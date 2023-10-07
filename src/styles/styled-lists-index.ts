@@ -55,7 +55,6 @@ export const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
-
 export const ButtonsContainer = styled.div`
   margin-right: 4%;
   display: flex;
@@ -100,5 +99,75 @@ export const DeleteListButton = styled.button`
 
   &:hover {
     color: ${({ theme }) => theme.red};
+  }
+`;
+
+export const ListComponent = styled.div`
+  width: 100%;
+  padding: ${pxToRem(70)};
+  padding-top: ${pxToRem(30)};
+`;
+
+export const ListHeader = styled.div`
+  font-size: ${pxToRem(25)};
+  color: ${({ theme }) => theme.title};
+  padding-bottom: ${pxToRem(60)};
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+`;
+
+export const CreateTaskButton = styled.button`
+  width: ${pxToRem(200)};
+  max-width: 100%;
+  height: ${pxToRem(50)};
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.blue};
+  color: #fff;
+  font-size: ${pxToRem(16)};
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(47, 128, 237, 0.8) 0px 5px 15px;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+export const RemoveList = styled.div`
+  font-size: ${pxToRem(16)};
+  color: ${({ theme }) => theme.red};
+  font-weight: 500;
+  text-align: center;
+  margin-left: -60px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const NoTaskFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: ${pxToRem(50)};
+
+  p {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.title};
+    text-align: center;
   }
 `;

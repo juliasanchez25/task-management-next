@@ -22,7 +22,6 @@ export const ProgressBar = styled.div<{ width: number; animate: boolean }>`
   width: ${(props) => (props.animate ? `${props.width}%` : '0%')};
   height: ${pxToRem(10)};
   border-radius: 20px;
-  transition: width 1s ease-in-out;
 `;
 
 export const TasksFinishedToday = styled.div`

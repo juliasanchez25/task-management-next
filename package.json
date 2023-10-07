@@ -22,7 +22,6 @@
     "chart.js": "^4.4.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
-    "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "lodash": "^4.17.21",
     "next": "13.4.13",
@@ -35,14 +34,17 @@
     "react-switch": "^7.0.0",
     "react-toastify": "^9.0.8",
     "sass": "^1.64.2",
-    "styled-components": "^5.3.11",
-    "typescript": "5.1.6"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.197",
     "@types/react-beautiful-dnd": "^13.1.4",
-    "@types/react-chartjs-2": "^2.5.7",
     "@types/styled-components": "^5.1.26",
-    "prettier": "^3.0.2"
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.51.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "prettier": "^3.0.2",
+    "typescript": "^5.2.2"
   }
 }

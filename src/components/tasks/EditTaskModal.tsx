@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { TaskModel, TaskTypeOption } from '@/models/Task';
+import { TaskModel, List, TaskTypeOption } from '@/models/Task';
 import { toast } from 'react-toastify';
-import TaskDates from './card/task-dates/TaskDates';
 import useKeypress from '../../hooks/useKeypress';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import * as s from './styled-modals';
+import { ListService } from '@/services/ListService';
+import TaskService from '@/services/TasksService';
+import { Controller, useForm } from 'react-hook-form';
 
 type EditTaskModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
   setTaskToEdit: React.Dispatch<React.SetStateAction<TaskModel | undefined>>;
   task: TaskModel;
 };
+
+type Fields = {
+  list: List;
+  title: string;
+  description: string;
+  endAt: string;
+}
 
 dayjs.extend(timezone);
 dayjs.extend(utc);
@@ -25,36 +33,24 @@ export const EditTaskModal = ({
   open,
   task,
   setOpen,
-  setTasks,
   setTaskToEdit,
 }: EditTaskModalProps) => {
-  const [title, setTitle] = useState<string>(task.title || '');
-  const [description, setDescription] = useState<string>(
-    task.description || '',
-  );
-  const [type, setType] = useState<TaskModel['type']>(task.type || 'personal');
-  const [endAt, setEndAt] = useState<Date>(
-    task.endAt || dayjs().add(1, 'day').toDate(),
-  );
-  const [tasksTypes, setTasksTypes]  = useState<TaskTypeOption[]>([]);
+  const [tasksLists, setTasksTypes]  = useState<TaskTypeOption[]>([]);
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<Fields>();
 
   useEffect(() => {
-    const createdLists = JSON.parse(localStorage.getItem('lists') || '[]') as TaskTypeOption[];
-    setTasksTypes([
-      { value: 'Trabalho', label: 'Trabalho' },
-      { value: 'Pessoal', label: 'Pessoal' },
-      ...createdLists
-    ]);
+    const createdLists = ListService.getLists();
+    setTasksTypes(createdLists);
   }, []);
 
-  const resetFields = () => {
-    setTitle('');
-    setDescription('');
-    setType('personal');
-  };
-
   const handleClose = () => {
-    resetFields();
+    reset();
     setOpen(false);
     setTaskToEdit(undefined);
   };
@@ -65,17 +61,10 @@ export const EditTaskModal = ({
     }
   });
 
-  const handleEdit = () => {
-    const editedTask = { ...task, title, description, type, endAt };
+  const handleEdit = (data: Fields) => {
+    const editedTask = { ...task, ...data, endAt: dayjs(data.endAt).toDate() };
 
-    setTasks((tasks) => {
-      return tasks.map((mappedTask) => {
-        if (mappedTask.id === task.id) {
-          return editedTask;
-        }
-        return mappedTask;
-      });
-    });
+    TaskService.substituteTask(editedTask);
 
     handleClose();
     setTaskToEdit(undefined);
@@ -83,60 +72,98 @@ export const EditTaskModal = ({
   };
 
   return (
-    <>
-      <Modal open={open}>
+    <Modal open={open} disableAutoFocus>
+      <form onSubmit={handleSubmit(handleEdit)}>
         <s.BoxContainer>
           <s.Top>
+            <s.Title>Editar tarefa</s.Title>
             <s.CloseButton onClick={handleClose}>
               <Close />
             </s.CloseButton>
           </s.Top>
-          <s.StyledTextField
-            id="standard-required"
-            label="Título da tarefa"
-            type="text"
-            variant="outlined"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+          <Controller
+            name='title'
+            control={control}
+            defaultValue={task.title}
+            rules={{
+              required: {
+                value: true,
+                message: '*Campo obrigatório'
+              },
+            }}
+            render={({ field: { value, onChange } }) => (
+              <s.StyledTextField
+                label="Título da tarefa"
+                type="text"
+                variant="outlined"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+              />
+            )}
           />
-          <s.StyledTextField
-            placeholder="Notas"
-            value={description}
-            type="text"
-            variant="outlined"
-            onChange={(e) => setDescription(e.target.value)}
-            multiline
-          />
+          {errors?.title && <s.ErrorMessage>{errors.title?.message}</s.ErrorMessage>}
+          <Controller
+            name='description'
+            control={control}
+            defaultValue={task.description}
+            render={({ field: { value, onChange } }) => (
+              <s.StyledTextField
+                placeholder="Notas"
+                value={value}
+                type="text"
+                variant="outlined"
+                onChange={(e) => onChange(e.target.value)}
+                multiline
+              />
+            )} />
           <FormControl>
             <s.StyledInputLabel id="demo-simple-select-label">
               Lista
             </s.StyledInputLabel>
-            <s.StyledSelect
-              required
-              label="Lista"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              variant="outlined"
-              value={type}
-              onChange={(e) => setType(e.target.value as TaskModel['type'])}
-            >
-              {tasksTypes.map(({ value, label }) => (
-                <MenuItem key={value} value={value}>
-                  {label}
-                </MenuItem>
-              ))}
-            </s.StyledSelect>
+            <Controller
+              name="list"
+              control={control}
+              defaultValue={task.list}
+              rules={{
+                required: {
+                  value: true,
+                  message: '*Campo obrigatório'
+                },
+              }}
+              render={({ field: { value, onChange } }) => (
+                <s.StyledSelect
+                  value={value}
+                  label="Lista"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  variant="outlined"
+                  onChange={(e) => onChange(e.target.value)}
+                >
+                  {tasksLists.map(({ value, label }) => (
+                    <MenuItem key={value} value={value}>
+                      {label}
+                    </MenuItem>
+                  ))}
+                </s.StyledSelect>
+              )}
+            />
           </FormControl>
+          {errors?.list && <s.ErrorMessage>{errors.list?.message}</s.ErrorMessage>}
           <s.Label>Data de entrega</s.Label>
-          <s.StyledTextField
-            type="date"
-            value={dayjs(endAt).format('YYYY-MM-DD')}
-            onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
-          />
-          <TaskDates task={task} />
-          <s.CreateButton onClick={handleEdit}>Editar tarefa</s.CreateButton>
+          <Controller
+            name='endAt'
+            control={control}
+            defaultValue={(dayjs(task.endAt) || dayjs().add(1, 'day')).format('YYYY-MM-DD')}
+            render={({ field: { value, onChange } }) => (
+              <s.StyledTextField
+                type="date"
+                value={value}
+                onChange={(e) => onChange(dayjs(e.target.value).format('YYYY-MM-DD'))}
+              />
+            )} />
+          <s.CreateButton type="submit">Salvar</s.CreateButton>
         </s.BoxContainer>
-      </Modal>
-    </>
+      </form>
+    </Modal>
   );
 };

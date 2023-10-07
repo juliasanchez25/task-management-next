@@ -57,3 +57,10 @@ export const CancelButton = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.title};
 `;
+
+export const SubTitle = styled.h2`
+  font-size: ${pxToRem(16)};
+  margin-top: -10px;
+  color: ${({ theme }) => theme.description};
+  font-weight: 400;
+`;

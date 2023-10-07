@@ -2,10 +2,11 @@ import React from 'react';
 import { Modal } from '@mui/material';
 import { toast } from 'react-toastify';
 import { Close } from '@mui/icons-material';
-import useKeypress from '@/hooks/useKeypress';
-import * as s from './styled-new-list-modal';
 import { Controller, useForm } from 'react-hook-form';
 import { TaskTypeOption } from '@/models/Task';
+import { ListService } from '@/services/ListService';
+import useKeypress from '@/hooks/useKeypress';
+import * as s from './styled-new-list-modal';
 
 type NewListModalProps = {
   open: boolean;
@@ -33,25 +34,30 @@ const NewListModal = ({
   const {
     control,
     formState: { errors },
+    watch,
     handleSubmit
   } = useForm<Fields>();
 
   const submit = (data: Fields) => {
-    const lists = JSON.parse(localStorage.getItem('lists') || '[]');
     const list: TaskTypeOption = {
       value: data.title,
       label: data.title
     };
-    lists.push(list);
-    localStorage.setItem('lists', JSON.stringify(lists));
+    ListService.addList(list);
 
     handleClose();
     toast.success('Lista criada com sucesso!');
   };
 
   return (
-    <Modal open={open}>
-      <form onSubmit={handleSubmit(submit)}>
+    <Modal open={open} disableAutoFocus>
+      <form onSubmit={handleSubmit(submit)} onKeyDown={
+        (e) => {
+          if (e.key === 'Enter') {
+            submit(watch());
+          }
+        }
+      }>
         <s.BoxContainer>
           <s.Top>
             <s.Title>Adicionar nova lista</s.Title>
@@ -61,6 +67,7 @@ const NewListModal = ({
           </s.Top>
           <Controller
             name='title'
+            defaultValue=''
             control={control}
             rules={{
               required: {

@@ -4,6 +4,7 @@ import { pxToRem } from '@/utils/px-to-rem';
 import { Schedule } from '@mui/icons-material';
 
 export const Container = styled.div<{ status: 'late' | 'today' | 'inTime' }>`
+  padding: ${pxToRem(2)} ${pxToRem(8)};
   display: flex;
   justify-content: center;
   align-items: center;

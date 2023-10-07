@@ -7,22 +7,20 @@ import {
 } from 'react-beautiful-dnd';
 import CustomCard from '@/components/tasks/card/custom-card/CustomCard';
 import * as s from './styled-tasks-droppable';
+import { useEffect, useState } from 'react';
+import RemoveModal from '../remove-modal/RemoveModal';
+import { EditTaskModal } from '../tasks/EditTaskModal';
+import { toast } from 'react-toastify';
+import TaskService from '@/services/TasksService';
 
 type TasksDroppableProps = {
   tasks: TaskModel[];
-  setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
-  openEditModal: (id: number) => void;
-  remove: (
-    id: number,
-    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-  ) => void;
+  refreshTasks?: () => void;
 };
 
 const TasksDroppable = ({
   tasks,
-  setTasks,
-  openEditModal,
-  remove,
+  refreshTasks
 }: TasksDroppableProps) => {
   const status = [
     {
@@ -38,6 +36,10 @@ const TasksDroppable = ({
       name: 'Done',
     },
   ];
+  const [taskToEdit, setTaskToEdit] = useState<TaskModel>();
+  const [removeModal, setRemoveModal] = useState<boolean>(false);
+  const [editModal, setEditModal] = useState<boolean>(false);
+  const [taskIdToRemove, setTaskIdToRemove] = useState<number>();
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -48,7 +50,6 @@ const TasksDroppable = ({
         return {
           ...task,
           status,
-          finishedAt: status === 'done' ? new Date() : undefined,
         };
       }
       return task;
@@ -65,52 +66,92 @@ const TasksDroppable = ({
       .concat(movedTask)
       .concat(tasksWithoutMovedTask.slice(result.destination.index));
 
-    setTasks(tasksWithMovedTask);
+    TaskService.setTasks(tasksWithMovedTask);
+    refreshTasks?.();
   };
 
+  const handleRemove = () => {
+    TaskService.removeTask(taskIdToRemove);
+    refreshTasks?.();
+    setRemoveModal(false);
+    toast.success('Tarefa removida com sucesso!');
+  };
+
+  useEffect(() => {
+    if (!editModal) {
+      refreshTasks?.();
+    }
+  }, [editModal]);
+
   return (
-    <s.DroppableTasks>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {status.map((status, index) => (
-          <s.DroppableTasksContainer key={index}>
-            <s.Title>{status.name}</s.Title>
-            <Droppable droppableId={status.id}>
-              {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps}>
-                  {tasks.map(
-                    (task, index) =>
-                      task.status === status.id && (
-                        <Draggable
-                          key={task.id}
-                          draggableId={task.id.toString()}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <s.DraggableCard
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              ref={provided.innerRef}
-                            >
-                              <CustomCard
-                                onClick={() => openEditModal(task.id)}
-                                index={index}
-                                task={task}
-                                remove={(id, event) => remove(id, event)}
-                                openEditModal={openEditModal}
-                              />
-                            </s.DraggableCard>
-                          )}
-                        </Draggable>
-                      ),
-                  )}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </s.DroppableTasksContainer>
-        ))}
-      </DragDropContext>
-    </s.DroppableTasks>
+    <>
+      {taskToEdit && (
+        <EditTaskModal
+          open={editModal}
+          setOpen={setEditModal}
+          task={taskToEdit}
+          setTaskToEdit={setTaskToEdit}
+        />
+      )}
+      {removeModal && (
+        <RemoveModal
+          open={removeModal}
+          setOpen={setRemoveModal}
+          onClickConfirm={handleRemove}
+        />
+      )}
+      <s.DroppableTasks>
+        <DragDropContext onDragEnd={onDragEnd}>
+          {status.map((status, index) => (
+            <s.DroppableTasksContainer key={index}>
+              <s.Title>{status.name}</s.Title>
+              <Droppable droppableId={status.id}>
+                {(provided) => (
+                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                    {tasks.map(
+                      (task, index) =>
+                        task.status === status.id && (
+                          <Draggable
+                            key={task.id}
+                            draggableId={task.id.toString()}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <s.DraggableCard
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                              >
+                                <CustomCard
+                                  onClick={() => {
+                                    setTaskToEdit(task);
+                                    setEditModal(true);
+                                  }}
+                                  index={index}
+                                  task={task}
+                                  remove={(id) => {
+                                    setTaskIdToRemove(id);
+                                    setRemoveModal(true);
+                                  }}
+                                  openEditModal={() => {
+                                    setTaskToEdit(task);
+                                    setEditModal(true);
+                                  }}
+                                />
+                              </s.DraggableCard>
+                            )}
+                          </Draggable>
+                        ),
+                    )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </s.DroppableTasksContainer>
+          ))}
+        </DragDropContext>
+      </s.DroppableTasks>
+    </>
   );
 };
 

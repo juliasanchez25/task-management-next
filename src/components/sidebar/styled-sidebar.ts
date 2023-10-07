@@ -53,7 +53,7 @@ export const Menu = styled.ul`
   color: ${({ theme }) => theme.title};
 `;
 
-export const Link = styled.li`
+export const Link = styled.li<{ subItems?: boolean; }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -64,28 +64,41 @@ export const Link = styled.li`
   cursor: pointer;
   gap: 10px;
   transition: 0.2s all ease-in-out;
+  pointer-events: ${({ subItems }) => !subItems ? 'all' : 'none'};
 
   &:hover {
-    color: ${({ theme }) => theme.lightBlue};
+      color: ${({ theme }) => theme.lightBlue};
   }
 `;
 
-export const SubItem = styled.div`
+export const SubItems = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: -15px;
-  gap: 10px;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
 
-  p {
-    margin: 0;
-    padding: 5px;
-    padding-left: ${pxToRem(30)};
-    font-size: ${pxToRem(15)};
-    cursor: pointer;
-    border-radius: 5px 0px 0px 5px;
+  div {
+    padding: ${pxToRem(5)} ${pxToRem(10)} ${pxToRem(15)};
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    border-radius: 5px 5px 5px 5px;
 
     &:hover {
       background-color: ${({ theme }) => theme.linkHover};
     }
+  };
+
+    p {
+      margin: 0;
+      font-size: ${pxToRem(15)};
+      max-width: ${pxToRem(150)};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &:first-child {
+        margin-top: 10px;
+      }
   }
 `;

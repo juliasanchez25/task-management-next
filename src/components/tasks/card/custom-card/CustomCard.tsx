@@ -1,6 +1,5 @@
 import { TaskModel } from '@/models/Task';
-import Tag from '../tags/task-type-tag/TaskTypeTag';
-import TaskDates from '../task-dates/TaskDates';
+import Tag from '../tags/task-list-tag/TaskListTag';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
@@ -27,7 +26,7 @@ const CustomCard = ({ task, onClick, remove, openEditModal }: CardProps) => {
   return (
     <s.Container>
       <s.CardTop>
-        <Tag type={task.type} />
+        <Tag list={task.list} />
         <TaskCurrentStatusTag task={task} />
         <CardActions task={task} remove={remove} openEditModal={openEditModal} />
       </s.CardTop>

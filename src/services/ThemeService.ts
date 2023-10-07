@@ -1,5 +1,4 @@
 type Theme = 'dark' | 'light';
-
 export class ThemeService {
   static getTheme(): Theme {
     if (typeof window === 'undefined') return 'light';

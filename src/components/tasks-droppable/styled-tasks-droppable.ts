@@ -10,6 +10,7 @@ export const DroppableTasksContainer = styled.div`
   flex-direction: column;
   flex: 1;
   width: 100%;
+  max-height: 300px;
 `;
 
 export const DraggableCard = styled.div`

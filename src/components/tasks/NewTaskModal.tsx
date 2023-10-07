@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormControl, MenuItem, Modal } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { TaskModel, TaskType, TaskTypeOption } from '@/models/Task';
+import { TaskModel, List, TaskTypeOption } from '@/models/Task';
 import { toast } from 'react-toastify';
 import useKeypress from '@/hooks/useKeypress';
 import dayjs from 'dayjs';
@@ -9,16 +9,18 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import * as s from './styled-modals';
 import { Controller, useForm } from 'react-hook-form';
+import { ListService } from '@/services/ListService';
+import TaskService from '@/services/TasksService';
 
 type NewTaskModalProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setTasks: React.Dispatch<React.SetStateAction<TaskModel[]>>;
+  list?: string;
+  refreshTasks?: () => void;
 };
 
-
 type Fields = {
-  category: TaskType;
+  category: List;
   title: string;
 }
 
@@ -28,7 +30,8 @@ dayjs.extend(utc);
 export const NewTaskModal = ({
   open,
   setOpen,
-  setTasks,
+  list,
+  refreshTasks
 }: NewTaskModalProps) => {
   const [description, setDescription] = useState<string>('');
   const [endAt, setEndAt] = useState<Date>(dayjs().add(1, 'day').toDate());
@@ -38,7 +41,7 @@ export const NewTaskModal = ({
     control,
     formState: { errors },
     reset,
-    handleSubmit
+    handleSubmit,
   } = useForm<Fields>();
 
   const resetFields = () => {
@@ -48,6 +51,7 @@ export const NewTaskModal = ({
 
   const handleClose = () => {
     resetFields();
+    refreshTasks?.();
     setOpen(false);
   };
 
@@ -58,12 +62,8 @@ export const NewTaskModal = ({
   });
 
   useEffect(() => {
-    const createdLists = JSON.parse(localStorage.getItem('lists') || '[]') as TaskTypeOption[];
-    setTasksTypes([
-      { value: 'Trabalho', label: 'Trabalho' },
-      { value: 'Pessoal', label: 'Pessoal' },
-      ...createdLists
-    ]);
+    const createdLists = ListService.getLists();
+    setTasksTypes(createdLists);
   }, []);
 
   const submit = (data: Fields) => {
@@ -71,31 +71,65 @@ export const NewTaskModal = ({
       id: Math.random(),
       title: data.title,
       description,
-      type: data.category,
+      list: data.category,
       status: 'todo',
       createdAt: new Date(),
       endAt,
     };
 
-    setTasks((tasks) => [...tasks, task]);
+    TaskService.addTasks(task);
+
     handleClose();
     toast.success('Tarefa criada com sucesso!');
   };
 
   return (
-    <>
-      <Modal open={open}>
-        <form onSubmit={handleSubmit(submit)}>
-          <s.BoxContainer>
-            <s.Top>
-              <s.Title>Adicionar nova tarefa</s.Title>
-              <s.CloseButton onClick={handleClose}>
-                <Close />
-              </s.CloseButton>
-            </s.Top>
+    <Modal open={open} disableAutoFocus>
+      <form onSubmit={handleSubmit(submit)}>
+        <s.BoxContainer>
+          <s.Top>
+            <s.Title>Adicionar nova tarefa</s.Title>
+            <s.CloseButton onClick={handleClose}>
+              <Close />
+            </s.CloseButton>
+          </s.Top>
+          <Controller
+            name='title'
+            control={control}
+            defaultValue=''
+            rules={{
+              required: {
+                value: true,
+                message: '*Campo obrigatório'
+              },
+            }}
+            render={({ field: { value, onChange } }) => (
+              <s.StyledTextField
+                label="Título da tarefa"
+                type="text"
+                variant="outlined"
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+              />
+            )}
+          />
+          {errors?.title && <s.ErrorMessage>{errors.title?.message}</s.ErrorMessage>}
+          <s.StyledTextField
+            placeholder="Notas"
+            value={description}
+            type="text"
+            variant="outlined"
+            onChange={(e) => setDescription(e.target.value)}
+            multiline
+          />
+          <FormControl>
+            <s.StyledInputLabel id="demo-simple-select-label">
+                  Lista
+            </s.StyledInputLabel>
             <Controller
-              name='title'
+              name="category"
               control={control}
+              defaultValue={list || tasksTypes?.[0]?.value}
               rules={{
                 required: {
                   value: true,
@@ -103,66 +137,34 @@ export const NewTaskModal = ({
                 },
               }}
               render={({ field: { value, onChange } }) => (
-                <s.StyledTextField
-                  label="Título da tarefa"
-                  type="text"
-                  variant="outlined"
+                <s.StyledSelect
                   value={value}
+                  label="Lista"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  variant="outlined"
+                  disabled={list !== undefined}
                   onChange={(e) => onChange(e.target.value)}
-                />
+                >
+                  {tasksTypes.map(({ value, label }) => (
+                    <MenuItem key={value} value={value}>
+                      {label}
+                    </MenuItem>
+                  ))}
+                </s.StyledSelect>
               )}
             />
-            {errors?.title && <s.ErrorMessage>{errors.title?.message}</s.ErrorMessage>}
-            <s.StyledTextField
-              placeholder="Notas"
-              value={description}
-              type="text"
-              variant="outlined"
-              onChange={(e) => setDescription(e.target.value)}
-              multiline
-            />
-            <FormControl>
-              <s.StyledInputLabel id="demo-simple-select-label">
-                  Lista
-              </s.StyledInputLabel>
-              <Controller
-                name="category"
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: '*Campo obrigatório'
-                  },
-                }}
-                render={({ field: { value, onChange } }) => (
-                  <s.StyledSelect
-                    value={value}
-                    label="Lista"
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    variant="outlined"
-                    onChange={(e) => onChange(e.target.value)}
-                  >
-                    {tasksTypes.map(({ value, label }) => (
-                      <MenuItem key={value} value={value}>
-                        {label}
-                      </MenuItem>
-                    ))}
-                  </s.StyledSelect>
-                )}
-              />
-            </FormControl>
-            {errors?.category && <s.ErrorMessage>{errors.category?.message}</s.ErrorMessage>}
-            <s.Label>Data de entrega</s.Label>
-            <s.StyledTextField
-              type="date"
-              value={dayjs(endAt).format('YYYY-MM-DD')}
-              onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
-            />
-            <s.CreateButton type="submit">Criar tarefa</s.CreateButton>
-          </s.BoxContainer>
-        </form>
-      </Modal>
-    </>
+          </FormControl>
+          {errors?.category && <s.ErrorMessage>{errors.category?.message}</s.ErrorMessage>}
+          <s.Label>Data de entrega</s.Label>
+          <s.StyledTextField
+            type="date"
+            value={dayjs(endAt).format('YYYY-MM-DD')}
+            onChange={(e) => setEndAt(dayjs(e.target.value).toDate())}
+          />
+          <s.CreateButton type="submit">Criar tarefa</s.CreateButton>
+        </s.BoxContainer>
+      </form>
+    </Modal>
   );
 };

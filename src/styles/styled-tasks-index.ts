@@ -71,12 +71,13 @@ export const CreateTaskButton = styled.button`
 `;
 
 export const Empty = styled.div`
+  margin-top: ${pxToRem(50)};
+  margin-right: ${pxToRem(165)};
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-right: ${pxToRem(165)};
 
   p {
     font-size: ${pxToRem(20)};

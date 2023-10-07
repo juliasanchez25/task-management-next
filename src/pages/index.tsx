@@ -3,15 +3,10 @@ import Head from 'next/head';
 import { Home } from '@/components/home/Home';
 
 const Index = () => {
-
   return (
     <>
       <Head>
-        <title>Home | Task Manager</title>
-        <meta
-          name="description"
-          content="Explore todas as tarefas pendentes e priorize suas atividades com eficiência!"
-        />
+        <title>Atividades | Task Manager</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Home />

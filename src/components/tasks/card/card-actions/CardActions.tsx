@@ -8,7 +8,6 @@ import * as s from './styled-card-actions';
 type CardProps = {
   task: TaskModel;
   index?: number;
-  onClick?: () => void;
   remove: (
     id: number,
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -16,12 +15,14 @@ type CardProps = {
   openEditModal: (id: number) => void;
 };
 
-const CardActions = ({ task, onClick, remove, openEditModal }: CardProps) => {
+const CardActions = ({ task, remove, openEditModal }: CardProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
